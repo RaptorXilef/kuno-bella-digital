@@ -69,6 +69,7 @@ export default class ChildState {
   }
 
   /**
+   * UTF-8 sicherer Base64 Export
    * Generiert den JSON-String für den Download.
    * @returns {string}
    */
@@ -81,18 +82,26 @@ export default class ChildState {
       date: this.date,
       answers: this.answers,
     };
+    const jsonStr = JSON.stringify(data);
+    // Konvertiert String zu Uint8Array und dann zu Base64 (UTF-8 safe)
+    const bytes = new TextEncoder().encode(jsonStr);
+    const binString = String.fromCodePoint(...bytes);
     // Macht die Datei unleserlich für "Laien" (Base64 Encode)
-    return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    return btoa(binString);
   }
 
   /**
+   * UTF-8 sicherer Base64 Import
    * Fabrikmethode: Erstellt eine ChildState-Instanz aus einem hochgeladenen JSON-String.
    * @param {string} jsonString
    * @returns {ChildState|null}
    */
   static importJSON(encodedString) {
     try {
-      const jsonString = decodeURIComponent(escape(atob(encodedString)));
+      const binString = atob(encodedString);
+      const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
+      const jsonString = new TextDecoder().decode(bytes);
+
       const data = JSON.parse(jsonString);
 
       if (!data.name || !data.version || !data.birthdate) {

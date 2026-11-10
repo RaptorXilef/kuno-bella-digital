@@ -195,7 +195,7 @@ export default class UIManager {
     // Metadaten anzeigen
     this.elements.evalMeta.innerHTML = `
             <strong>Kind:</strong> ${this.currentChildState.name}<br>
-            <strong>Lebensalter:</strong> ${ageInMonths} Monate
+            <strong>Lebensalter (bei Beobachtung):</strong> ${ageInMonths} Monate
         `;
 
     // 2. Diagramm-Bereich sichtbar machen
@@ -222,13 +222,16 @@ export default class UIManager {
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
             order: 2,
+            barPercentage: 0.6,
           },
           {
             type: 'line',
-            label: 'Lebensalter',
+            label: 'Lebensalter (Durchschnitt)',
             data: ageLine,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0, // Keine Punkte auf der Linie
             fill: false,
             order: 1,
           },
@@ -241,28 +244,57 @@ export default class UIManager {
           y: {
             beginAtZero: true,
             max: 14, // Da wir 14 Phasen haben
-            title: { display: true, text: 'Phasen (ca. Monate)' },
+            title: { display: true, text: 'Phasen (ca. Monate)', font: { size: 14, weight: 'bold' } },
+            ticks: {
+              // Zwingt Chart.js, in 0.1er Schritten zu arbeiten
+              stepSize: 0.1,
+              callback: (value) => {
+                // Zeige nur volle Zahlen (1, 2, 3...) an der Achse an
+                if (Number.isInteger(value)) {
+                  return value;
+                }
+                return null;
+              },
+            },
+            grid: {
+              // Zeichnet die Linien im Hintergrund (0.1 bis 0.9)
+              color: (context) => {
+                if (context.tick.value === 0) return 'rgba(0, 0, 0, 0.5)'; // Nulllinie dunkel
+                if (Number.isInteger(context.tick.value)) {
+                  return 'rgba(0, 0, 0, 0.3)'; // Volle Phasen (1, 2, 3) normal
+                }
+                // Die .5er Mitte (Halbe Phase) etwas dunkler hervorheben
+                if ((context.tick.value * 10) % 10 === 5) {
+                  return 'rgba(0, 0, 0, 0.15)';
+                }
+                // Die 9 kleinen Zwischenstriche (0.1, 0.2...) sehr dezent
+                return 'rgba(0, 0, 0, 0.05)';
+              },
+            },
           },
         },
       },
     });
 
-    // WICHTIGER WORKAROUND FÜR HTML2PDF.js
+    // WICHTIGER WORKAROUND FÜR HTML2PDF.js (OKLCH Bugfix)
     // Wandelt temporär alle CSS-Variablen von oklch zu simplen RGB Werten um
     const originalBg = document.documentElement.style.getPropertyValue('--color-bg');
     const originalSurface = document.documentElement.style.getPropertyValue('--color-surface');
+    const originalText = document.documentElement.style.getPropertyValue('--color-text-main');
 
     document.documentElement.style.setProperty('--color-bg', '#ffffff');
     document.documentElement.style.setProperty('--color-surface', '#ffffff');
+    document.documentElement.style.setProperty('--color-text-main', '#333333');
 
-    // PDF Generierung (Timeout für die Canvas-Animation)
+    // Kurzer Timeout für das Diagramm-Rendering, dann drucken
     setTimeout(() => {
       const opt = {
-        margin: 10,
+        margin: [15, 10, 15, 10], // Etwas mehr Margin oben und unten
         filename: `kuno_beller_${this.currentChildState.name}_${this.currentChildState.date}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: 'css', avoid: '.c-phase' }, // Versucht, Phasen auf Seiten nicht zu durchschneiden
       };
 
       // Nimmt NUR den main#pdf-content Bereich
@@ -274,7 +306,8 @@ export default class UIManager {
           // Restore variables
           document.documentElement.style.setProperty('--color-bg', originalBg);
           document.documentElement.style.setProperty('--color-surface', originalSurface);
+          document.documentElement.style.setProperty('--color-text-main', originalText);
         });
-    }, 800);
+    }, 1000);
   }
 }
