@@ -19,26 +19,47 @@ export default class FormBuilder {
    */
   build() {
     this.container.innerHTML = ''; // Container leeren, falls wir neu laden
+    let isFirst = true; // Flag, um nur das erste Element auszuklappen
 
     for (const [categoryName, phases] of Object.entries(this.questionsData)) {
-      const categorySection = this.createCategorySection(categoryName, phases);
+      const categorySection = this.createCategorySection(categoryName, phases, isFirst);
       this.container.appendChild(categorySection);
+      isFirst = false; // Alle folgenden sind eingeklappt
     }
   }
 
   /**
    * Baut einen Bereich für eine Kategorie (z.B. Körperpflege).
    */
-  createCategorySection(categoryName, phases) {
+  createCategorySection(categoryName, phases, isFirst) {
     // Flaches, stabiles Layout (kein Akkordeon)
     const section = document.createElement('section');
-    section.className = 'c-category';
+    // Wenn es nicht das erste ist, hängen wir die 'is-collapsed' Klasse dran
+    section.className = `c-category ${isFirst ? '' : 'is-collapsed'}`;
     // Attribut für das farbige Styling der jeweiligen Kategorie
     section.setAttribute('data-category', categoryName);
 
     const title = document.createElement('h2');
     title.className = 'c-category__title';
     title.textContent = categoryName;
+
+    // AKKORDEON KLICK-LOGIK
+    title.addEventListener('click', () => {
+      const isCurrentlyCollapsed = section.classList.contains('is-collapsed');
+
+      // 1. Erstmal alle Kategorien einklappen
+      const allCategories = this.container.querySelectorAll('.c-category');
+      for (const cat of allCategories) {
+        cat.classList.add('is-collapsed');
+      }
+
+      // 2. Die geklickte Kategorie nur aufklappen, wenn sie vorher zu war
+      // (War sie vorher schon auf, bleibt sie jetzt zu).
+      if (isCurrentlyCollapsed) {
+        section.classList.remove('is-collapsed');
+      }
+    });
+
     section.appendChild(title);
 
     for (const [phaseName, questions] of Object.entries(phases)) {

@@ -202,6 +202,8 @@ body {
 }
 
 /* Questionnaire Domain mit dynamischen Bereichsfarben */
+
+/* Questionnaire Domain mit dynamischen Bereichsfarben */
 .c-category {
   /* Fallback Farbe, falls keine gematched wird */
   --cat-color: var(--color-primary);
@@ -253,12 +255,46 @@ body {
   background-color: var(--cat-bg);
   border-radius: var(--radius);
   box-shadow: 0 4px 6px rgb(0 0 0 / 0.05);
+  transition: padding 0.3s ease; /* Weicher Übergang beim Einklappen */
 
   &__title {
     padding-bottom: var(--spacing-sm);
     margin-bottom: var(--spacing-lg);
     color: var(--cat-color);
+
+    /* Akkordeon Header-Styling */
+    cursor: pointer;
     border-bottom: 2px solid var(--cat-color);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &::after {
+      float: right;
+      font-size: 0.8em;
+      content: '▼';
+      transition: transform 0.3s ease;
+    }
+  }
+
+  /* Status: Eingeklappt */
+  &.is-collapsed {
+    padding: var(--spacing-md) var(--spacing-lg); // Macht die Karte oben & unten etwas schmaler
+
+    .c-phase {
+      display: none;
+    }
+
+    .c-category__title {
+      margin-bottom: 0;
+      border-bottom-color: transparent;
+
+      &::after {
+        transform: rotate(-90deg); /* Pfeil zeigt nach rechts */
+      }
+    }
   }
 }
 
@@ -541,5 +577,10 @@ body {
     #assessment-section .c-category:first-child {
       break-before: auto !important;
     }
+  }
+
+  /* Sicherstellung: Selbst wenn eine Kategorie eingeklappt ist, drucken wir ALLES! */
+  .c-category.is-collapsed .c-phase {
+    display: block !important;
   }
 }

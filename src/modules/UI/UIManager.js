@@ -313,6 +313,10 @@ export default class UIManager {
     this.elements.exportPdfEvalBtn.classList.remove('is-hidden');
     this.elements.exportPdfQuestBtn.classList.remove('is-hidden');
 
+    // WICHTIG: Alle Akkordeons beim Auswerten automatisch ausklappen!
+    const allCategories = document.querySelectorAll('.c-category');
+    allCategories.forEach((cat) => cat.classList.remove('is-collapsed'));
+
     // Render Schnellübersicht
     this.generateOverviewGrid();
 
@@ -322,7 +326,7 @@ export default class UIManager {
 
     const ageInMonths = this.currentChildState.getAgeInMonths();
     // Hier greift nun die reparierte Logik, die 5 Jahre alt = Phase 14 liefert!
-    const bellerPhaseAge = Evaluation.convertMonthsToPhase(ageInMonths);
+    const bellerPhaseAge = Math.min(14, Evaluation.convertMonthsToPhase(ageInMonths));
 
     // Metadaten anzeigen
     this.elements.evalMeta.innerHTML = `
@@ -453,7 +457,6 @@ export default class UIManager {
       },
     });
 
-    // Nach der Auswertung sanft nach oben zum Diagramm scrollen
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
