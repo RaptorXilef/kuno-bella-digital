@@ -43,7 +43,7 @@ export default class FormBuilder {
     title.className = 'c-category__title';
     title.textContent = categoryName;
 
-    // AKKORDEON KLICK-LOGIK
+    // AKKORDEON KLICK-LOGIK MIT AUTO-SCROLL
     title.addEventListener('click', () => {
       const isCurrentlyCollapsed = section.classList.contains('is-collapsed');
 
@@ -57,6 +57,16 @@ export default class FormBuilder {
       // (War sie vorher schon auf, bleibt sie jetzt zu).
       if (isCurrentlyCollapsed) {
         section.classList.remove('is-collapsed');
+
+        // 3. Intelligentes Auto-Scrollen zur Überschrift
+        // Ein kurzes Timeout gibt dem Browser Zeit, das Einklappen der anderen
+        // Elemente grafisch zu berechnen, bevor gescrollt wird.
+        setTimeout(() => {
+          // Holt die exakte Y-Koordinate der Karte minus 100 Pixel
+          // (damit sie nicht hinter der oberen Menüleiste verschwindet!)
+          const yOffset = section.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: yOffset, behavior: 'smooth' });
+        }, 50);
       }
     });
 
