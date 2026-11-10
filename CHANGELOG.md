@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.0](https://github.com/RaptorXilef/kuno-bella-digital/compare/v0.1.0...v0.2.0) (2026-11-10)
+
+### 🚀 Features
+
+* **pwa:** Convert application into an installable Progressive Web App (PWA) ([b1c1a43](https://github.com/RaptorXilef/kuno-bella-digital/commit/b1c1a43902d06fe13d1375c2ba0a6955985769fc))
+* **ui:** Add favicon and Apple Touch Icon support for browser tabs and iOS ([eb85a13](https://github.com/RaptorXilef/kuno-bella-digital/commit/eb85a134c29ef6fc909a1c0fa7bec2e0dffe6b44))
+
+### 🐛 Bug Fixes
+
+* **deploy:** Escape special characters in ZIP password and configure FTP target directory ([50d170b](https://github.com/RaptorXilef/kuno-bella-digital/commit/50d170b0ec08e3552b22c2026da733a0e7e7b36d))
+* **deploy:** Resolve unsupported compression method 99 by swapping unzip for 7zip ([362785b](https://github.com/RaptorXilef/kuno-bella-digital/commit/362785ba1b5f7b9f2d9455b68f732e6f994a5f98))
+
+### 📚 Dokumentation
+
+* **deploy:** Configure GitHub Actions FTP deployment and document server public directory setup ([10a78b3](https://github.com/RaptorXilef/kuno-bella-digital/commit/10a78b3f821312b430882a98a0e9023992633e50))
+
 ## 0.1.0 (2026-11-10)
 
 ### 🚀 Features
