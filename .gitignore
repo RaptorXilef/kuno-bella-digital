@@ -53,6 +53,9 @@
 
 ### Manuell ###
 
+node_modules/
+vendor/
+
 # Stammverzeichnis Dateien
 _notizen/
 .env

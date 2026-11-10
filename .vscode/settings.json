@@ -27,15 +27,13 @@
     "editor.formatOnType": false,
     "editor.formatOnPaste": false,
 
-    // --- PHP & INTELEPHENSE ---
+    // --- PHP ---
     "[php]": {
-        //"editor.defaultFormatter": "bmewburn.vscode-intelephense-client", // Intelephense als Basis
         "editor.defaultFormatter": "muuvmuuv.vscode-just-php-cs-fixer",
         "editor.wordWrap": "off",
         "editor.renderWhitespace": "boundary"
     },
     "[phtml]": {
-        //"editor.defaultFormatter": "bmewburn.vscode-intelephense-client", // Intelephense als Basis
         "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
         "editor.wordWrap": "off",
         "editor.renderWhitespace": "boundary",
@@ -45,7 +43,7 @@
     "php.suggest.basic": false,
     "php-docblocker.gap": true,
 
-    // --- BIOME (JS, JSON, CSS/SCSS) ---
+    // --- BIOME (JS, JSON) ---
     "[javascript]": {
         "editor.defaultFormatter": "biomejs.biome",
         "editor.formatOnSave": false,
@@ -58,7 +56,8 @@
     },
     "[json]": { "editor.defaultFormatter": "biomejs.biome" },
     "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
-    // Generelles Formatting (Prettier für SCSS übernehmen lassen)
+
+    // --- CSS / SCSS ---
     "[scss]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": false,
@@ -67,27 +66,18 @@
             "source.fixAll.stylelint": "explicit"
         }
     },
-    "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "diffEditor.ignoreTrimWhitespace": false,
-        "editor.formatOnSave": false
-    },
-
-    // Stylelint explizit sagen, welche Dateien es validieren soll
-    "stylelint.validate": ["css", "postcss", "scss"],
-
-    // Vermeide Konflikte mit dem eingebauten VSCode CSS/SCSS-Linter
+    "stylelint.validate": ["css", "scss"],
     "css.validate": false,
     "scss.validate": false,
     "less.validate": false,
 
-    // --- HTML & MARKUPLINT ---
+    // --- HTML ---
     "[html]": {
         "editor.defaultFormatter": "biomejs.biome",
         "editor.codeActionsOnSave": { "source.fixAll.markuplint": "explicit" }
     },
 
-    // --- MARKDOWN & REWRAP ---
+    // --- MARKDOWN ---
     "[markdown]": {
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
         "editor.wordWrap": "on"
@@ -99,187 +89,61 @@
     "rewrap.wholeComment": true,
 
     // =========================================================================
-    // EXPLORER, SEARCH & WATCHER (Performance & Ordnung)
+    // EXPLORER, SEARCH & WATCHER
     // =========================================================================
     "files.exclude": {
         "**/.git": true,
-        "**/.svn": true,
         "**/.DS_Store": true,
-        "**/node_modules": false, // Wir wollen sie sehen, aber...
-        "**/vendor": false, // ...unten in der Suche ausschließen
+        "**/node_modules": false,
+        "**/vendor": false,
         "**/.build": true,
         "**/.cache": true,
         "**/.debug": true,
         "**/*.map": true,
         ".phpcs.cache": true,
         ".phpstan.cache": true,
-        ".phpunit.cache": true
+        ".phpunit.cache": true,
+        "public/dist": false
     },
     "search.exclude": {
         "**/node_modules": true,
         "**/vendor": true,
         "**/.build": true,
-        "**/.cache": true
+        "**/.cache": true,
+        "public/dist": true
     },
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/node_modules/**": true,
         "**/vendor/**": true,
-        "**/.debug/**": true
+        "**/.debug/**": true,
+        "**/public/dist/**": true
     },
-    "intelephense.diagnostics.undefinedTypes": true,
-    "intelephense.diagnostics.exclude": {
-        "undefinedTypes": ["**/.cache/**", "**/temp/**"],
-        "undefinedFunctions": ["**/.cache/**", "**/temp/**"],
-        "undefinedConstants": ["**/.cache/**", "**/temp/**"],
-        "undefinedProperties": ["**/.cache/**", "**/temp/**"],
-        "undefinedMethods": ["**/.cache/**", "**/temp/**"],
-        "unusedSymbols": ["**/.cache/**", "**/temp/**"]
-    },
-    "intelephense.environment.exclude": ["**/.cache/**", "**/temp/**"],
-    "intelephense.files.exclude": [
-        "**/.cache/**",
-        "**/.build/**",
-        "**/.php-cs-fixer.dist.php",
-        "**/.git/**",
-        "**/.svn/**",
-        "**/.hg/**",
-        "**/CVS/**",
-        "**/.DS_Store/**",
-        "**/node_modules/**",
-        "**/bower_components/**"
-    ],
-    // Das hier hilft, wenn Intelephense hängen bleibt
-    "intelephense.completion.fullyQualifyImportNames": true,
 
+    "intelephense.diagnostics.undefinedTypes": false, // Deaktiviert, da wir 90% JS machen
     "intelephense.diagnostics.deprecated": true,
     "intelephense.diagnostics.run": "onType",
     "problems.showCurrentInStatus": true,
 
-    "draw.folder.structure.exclude": [
-        "**/node_modules",
-        "**/.git",
-        "**/dist",
-        "**/.next",
-        "**/out",
-        "**/.build",
-        "**/.cache",
-        "**/.debug",
-        "**/.github",
-        "**/.husky",
-        "**/.vscode",
-        "**/docs",
-        "**/scripts",
-        "**/tools",
-        "**/vendor"
-    ],
-
     // =========================================================================
-    // TOOLS & WORKFLOW (Meine persönlichen Favoriten)
+    // TOOLS & WORKFLOW
     // =========================================================================
-
-    // --- DIFF EDITOR ---
     "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.experimental.showMoves": true,
     "diffEditor.codeLens": true,
     "diffEditor.maxComputationTime": 30000,
 
-    // --- TODO TREE ---
-    /*"better-todo-tree.general.tags": [
-        "BUG",
-        "HACK",
-        "FIXME",
-        "TODO",
-        "XXX",
-        "[ ]",
-        "[x]",
-        "VOR_RELEASE"
-    ],
-    "better-todo-tree.highlights.useColourScheme": true,
-    "better-todo-tree.highlights.backgroundColourScheme": [
-        "red",
-        "orange",
-        "yellow",
-        "green",
-        "blue",
-        "indigo",
-        "violet",
-        "purple"
-    ],*/
-    //"better-todo-tree.filtering.excludeGlobs": ["**/node_modules/**", "**/vendor/**", "**/*.pdf"],
-
-    // --- SPELL CHECK ---
     "cSpell.language": "en,de",
     "cSpell.diagnosticLevel": "Hint",
-
-    // --- TERMINAL ---
     "terminal.integrated.defaultProfile.windows": "Git Bash",
-
-    // --- THEME ---
     "errorLens.onInlayHints": true,
 
-    // --- Vira Theme ---
+    // --- THEME ---
     "files.insertFinalNewline": true,
     "workbench.iconTheme": "vira-icons-carbon",
     "workbench.productIconTheme": "viraUIIcons",
     "workbench.colorTheme": "Vira Carbon High Contrast",
-    "workbench.colorCustomizations": {
-        "[Vira*]": {
-            "statusBar.debuggingBackground": "#FFFFFF33",
-            "statusBar.debuggingForeground": "#FFFFFF",
-            "toolbar.activeBackground": "#FFFFFF26",
-            "button.background": "#FFFFFF",
-            "button.hoverBackground": "#FFFFFFcc",
-            "extensionButton.separator": "#FFFFFF33",
-            "extensionButton.background": "#FFFFFF14",
-            "extensionButton.foreground": "#FFFFFF",
-            "extensionButton.hoverBackground": "#FFFFFF33",
-            "extensionButton.prominentForeground": "#FFFFFF",
-            "extensionButton.prominentBackground": "#FFFFFF14",
-            "extensionButton.prominentHoverBackground": "#FFFFFF33",
-            "activityBarBadge.background": "#FFFFFF",
-            "activityBar.activeBorder": "#FFFFFF",
-            "activityBarTop.activeBorder": "#FFFFFF",
-            "list.inactiveSelectionIconForeground": "#FFFFFF",
-            "list.activeSelectionForeground": "#FFFFFF",
-            "list.inactiveSelectionForeground": "#FFFFFF",
-            "list.highlightForeground": "#FFFFFF",
-            "sash.hoverBorder": "#FFFFFF80",
-            "list.activeSelectionIconForeground": "#FFFFFF",
-            "scrollbarSlider.activeBackground": "#FFFFFF80",
-            "editorSuggestWidget.highlightForeground": "#FFFFFF",
-            "textLink.foreground": "#FFFFFF",
-            "progressBar.background": "#FFFFFF",
-            "pickerGroup.foreground": "#FFFFFF",
-            "tab.activeBorder": "#FFFFFF",
-            "tab.activeBorderTop": "#FFFFFF00",
-            "tab.unfocusedActiveBorder": "#FFFFFF",
-            "tab.unfocusedActiveBorderTop": "#FFFFFF00",
-            "tab.activeModifiedBorder": "#FFFFFF00",
-            "notificationLink.foreground": "#FFFFFF",
-            "editorWidget.resizeBorder": "#FFFFFF",
-            "editorWidget.border": "#FFFFFF",
-            "settings.modifiedItemIndicator": "#FFFFFF",
-            "panelTitle.activeBorder": "#FFFFFF",
-            "breadcrumb.activeSelectionForeground": "#FFFFFF",
-            "menu.selectionForeground": "#FFFFFF",
-            "menubar.selectionForeground": "#FFFFFF",
-            "editor.findMatchBorder": "#FFFFFF",
-            "selection.background": "#FFFFFF40",
-            "statusBarItem.remoteBackground": "#FFFFFF14",
-            "statusBarItem.remoteHoverBackground": "#FFFFFF",
-            "statusBarItem.remoteForeground": "#FFFFFF",
-            "notebook.inactiveFocusedCellBorder": "#FFFFFF80",
-            "chat.slashCommandForeground": "#FFFFFF",
-            "chat.avatarForeground": "#FFFFFF",
-            "activityBarBadge.foreground": "#000000",
-            "button.foreground": "#000000",
-            "statusBarItem.remoteHoverForeground": "#000000"
-        }
-    },
     "viraTheme.accent": "White",
 
-    // -- HINWEISE ---
-    // vscode://settings/php-cs-fixer.allow-risky muss auf true gesetzt werden! Also Haken rein!
     "php-cs-fixer.toolPath": "${workspaceFolder}/vendor/bin/php-cs-fixer.bat"
 }

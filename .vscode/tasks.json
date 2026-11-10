@@ -8,6 +8,14 @@
             "problemMatcher": [],
             "group": "none",
             "detail": "Führt PHP-CS-Fixer manuell aus"
+        },
+        {
+            "type": "shell",
+            "label": "npm: dev",
+            "command": "npm run dev",
+            "problemMatcher": [],
+            "group": "build",
+            "detail": "Startet den Vite Development Server"
         }
     ]
 }

@@ -33,13 +33,17 @@
         "breadnaught.vscode-ignore",
         "eamodio.gitlens",
         "github.vscode-github-actions",
+
         "github.vscode-pull-request-github",
+
         "mhutchie.git-graph",
 
         // CODE QUALITY & DOKU
         "aaron-bond.better-comments", // Bessere Kommentare
         "DavidAnson.vscode-markdownlint",
+
         "fanaticpythoner.better-todo-tree",
+
         "oderwat.indent-rainbow",
         "streetsidesoftware.code-spell-checker-german",
         "streetsidesoftware.code-spell-checker",
@@ -51,33 +55,22 @@
         "eriklynd.json-tools",
         "janisdd.vscode-edit-csv",
         "ldd-vs-code.better-package-json",
-        "mechatroner.rainbow-csv",
+
         "mrmlnc.vscode-apache",
+
         "tomoki1207.pdf",
         "yo1dog.cursor-align",
 
         // Deutsch/German
         "ms-ceintl.vscode-language-pack-de",
         "nobuhito.printcode",
-
-        // THEME/VSCODE
-        // "lakshits11.monokai-pirokai",
-        "st-pham.php-refactor-tool",
         "vira.vsc-vira-theme",
 
         // Unsortiert
         "devsense.composer-php-vscode",
-        "repreng.csv",
-        "jmkrivocapich.drawfolderstructure",
         "kisstkondoros.vscode-gutter-preview",
-        "glenn2223.live-sass",
         "yzhang.markdown-all-in-one",
-        "mehedidracula.php-namespace-resolver",
-        "redhat.vscode-xml",
-        "neontoolkit.vscode-neon-toolkit",
-        "rhevorn.confetti",
-        "dansysanalyst.pest-snippets"
+        "mehedidracula.php-namespace-resolver"
     ],
-    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
     "unwantedRecommendations": ["htmlhint.vscode-htmlhint", "mikebovenlander.formate"]
 }
