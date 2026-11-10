@@ -421,22 +421,31 @@ export default class UIManager {
             title: { display: true, text: 'Phasen', font: { size: 14, weight: 'bold' } },
             ticks: {
               stepSize: 0.1, // 0.1er Schritte erzwingen
+              autoSkip: false, // WICHTIG: Erzwingt, dass jede Linie gezeichnet wird
               callback: (value) => {
                 // Die Achse soll nur Zahlen beschriften, bei 1.0, 2.0, 3.0 etc.
                 // Um float-math-Fehler zu umgehen (1.000000001), runden wir auf 1 Nachkommastelle
                 const rounded = Math.round(value * 10) / 10;
-                return Number.isInteger(rounded) ? rounded : null;
+                // Gitternetzlinie zeichnen, Text aber nur bei vollen Zahlen anzeigen
+                return Number.isInteger(rounded) ? rounded.toString() : '';
               },
             },
             grid: {
               // Zeichnet die Linien im Hintergrund (0.1 bis 0.9)
               color: (context) => {
+                if (context.tick === undefined) return 'rgba(0,0,0,0.05)';
                 const rounded = Math.round(context.tick.value * 10) / 10;
-                if (rounded === 0) return 'rgba(0, 0, 0, 0.5)'; // Dicke 0 Linie
-                if (Number.isInteger(rounded)) return 'rgba(0, 0, 0, 0.4)'; // Dickere Linie bei 1, 2, 3...
-
+                if (rounded === 0) return 'rgba(0, 0, 0, 0.6)';
+                if (Number.isInteger(rounded)) return 'rgba(0, 0, 0, 0.4)';
+                if ((rounded * 10) % 10 === 5) return 'rgba(0, 0, 0, 0.15)'; // 0.5er Striche etwas sichtbarer
+                return 'rgba(0, 0, 0, 0.05)'; // 0.1er Striche ganz dezent
+              },
+              lineWidth: (context) => {
+                if (context.tick === undefined) return 1;
+                const rounded = Math.round(context.tick.value * 10) / 10;
+                if (Number.isInteger(rounded)) return 2; // Volle Phasen sind dicker
                 // Super feine Hilfslinien bei 0.1, 0.2, 0.3...
-                return 'rgba(0, 0, 0, 0.05)';
+                return 1;
               },
             },
           },
