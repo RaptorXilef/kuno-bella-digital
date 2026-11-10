@@ -27,15 +27,16 @@ jobs:
       - name: 📦 NPM Abhängigkeiten installieren
         run: npm ci
 
-      - name: 🛠️ ZIP entpacken installieren
-        run: sudo apt-get install -y unzip
+      - name: 🛠️ 7-Zip installieren (unterstützt AES-Verschlüsselung)
+        run: sudo apt-get install -y p7zip-full
 
       - name: 🔒 Fragen-Katalog entschlüsseln
         # WICHTIG: Das Passwort in einfache Anführungszeichen setzen,
         # damit Sonderzeichen (Klammern, & etc.) nicht als Bash-Befehl gewertet werden!
         run: |
           cd src/assets/data
-          unzip -P '${{ secrets.KUNO_SECRET_PASS }}' questions.zip
+          # 7z x steht für eXtract. Das Passwort wird direkt an -p (ohne Leerzeichen!) angehängt
+          7z x -p'${{ secrets.KUNO_SECRET_PASS }}' questions.zip
           rm questions.zip
 
       - name: 🛠️ Frontend Assets kompilieren (Vite Build)
