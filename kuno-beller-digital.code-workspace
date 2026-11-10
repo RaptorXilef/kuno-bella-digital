@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"gremlins.showInProblemPane": true,
+		"intelephense.format.enable": false,
+		"php-docblocker.gap": true,
+		"intelephense.diagnostics.undefinedTypes": false,
+		"intelephense.diagnostics.deprecated": true,
+		"intelephense.diagnostics.run": "onType",
+		"problems.showCurrentInStatus": true,
+		"terminal.integrated.defaultProfile.windows": "Git Bash",
+		"workbench.iconTheme": "vira-icons-carbon",
+		"workbench.productIconTheme": "viraUIIcons",
+		"workbench.colorTheme": "Vira Carbon High Contrast",
+		"viraTheme.accent": "White"
+	}
+}
