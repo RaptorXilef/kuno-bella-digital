@@ -334,3 +334,54 @@ body {
 .u-page-break-before {
   break-before: page; /* Für bessere PDF Kompatibilität */
 }
+
+/* ==========================================================================
+   PRINT STYLES (Native PDF Export)
+   ========================================================================== */
+@media print {
+  @page {
+    size: a4 portrait;
+    margin: 1.5cm;
+  }
+
+  body {
+    /* Zwingt Chrome/Edge dazu, alle Hintergrundfarben exakt so zu drucken, wie sie auf dem Screen sind */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #fff;
+  }
+
+  /* Blendet UI-Elemente aus, die im PDF nichts verloren haben */
+  .l-header,
+  #setup-section {
+    display: none !important;
+  }
+
+  .l-container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Diagramm-Optimierung für PDF */
+  .c-evaluation {
+    margin-bottom: 2rem;
+    box-shadow: none; /* Nach dem Diagramm zwingend eine neue Seite starten */
+    break-after: page;
+
+    &__chart-wrapper {
+      height: 20cm !important; /* Exakte Höhe für A4-Seite */
+      max-height: 20cm !important;
+    }
+  }
+
+  /* Kategorien und Phasen für PDF optimieren */
+  .c-category {
+    border: 1px solid var(--color-border);
+    box-shadow: none; /* Jede der 8 Haupt-Kategorien startet auf einer frischen Seite! */
+    break-before: page;
+  }
+
+  .c-phase { /* Niemals mitten in einer Phase die Seite umbrechen */
+    break-inside: avoid;
+  }
+}

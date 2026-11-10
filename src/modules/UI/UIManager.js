@@ -1,5 +1,4 @@
 import Chart from 'chart.js/auto';
-import html2pdf from 'html2pdf.js';
 import Evaluation from '../AssessmentDomain/Evaluation.js';
 import ChildState from '../ChildDomain/ChildState.js';
 import FormBuilder from './FormBuilder.js';
@@ -38,8 +37,6 @@ export default class UIManager {
       evaluationSection: document.getElementById('evaluation-section'),
       evalMeta: document.getElementById('eval-meta'),
       chartCanvas: document.getElementById('kuno-chart'),
-
-      pdfContentArea: document.getElementById('pdf-content'),
     };
   }
 
@@ -250,9 +247,7 @@ export default class UIManager {
               stepSize: 0.1,
               callback: (value) => {
                 // Zeige nur volle Zahlen (1, 2, 3...) an der Achse an
-                if (Number.isInteger(value)) {
-                  return value;
-                }
+                if (Number.isInteger(value)) return value;
                 return null;
               },
             },
@@ -272,39 +267,9 @@ export default class UIManager {
       },
     });
 
-    // HTML2PDF WORKAROUND:
-    // Setze für den Druck die Root-Styles auf Standard RGB-Werte (html2pdf crasht bei CSS-Variablen + oklch)
-    const root = document.documentElement;
-    root.style.cssText = `
-            --color-bg: #f9f9fa;
-            --color-surface: #ffffff;
-            --color-text-main: #333333;
-            --color-primary: #3b82f6;
-            --color-success: #22c55e;
-            --color-danger: #ef4444;
-            --color-border: #e5e7eb;
-        `;
-
-    // Kurzer Timeout für das Diagramm-Rendering, dann drucken
+    // Dem Chart kurz Zeit geben (Animations-Ende), dann nativ drucken
     setTimeout(() => {
-      const opt = {
-        margin: [15, 10, 15, 10], // Etwas mehr Margin oben und unten
-        filename: `kuno_beller_${this.currentChildState.name}_${this.currentChildState.date}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'css', avoid: ['.c-phase', '.c-category'] }, // Versucht, Phasen auf Seiten nicht zu durchschneiden
-      };
-
-      // Nimmt NUR den main#pdf-content Bereich
-      html2pdf()
-        .set(opt)
-        .from(this.elements.pdfContentArea)
-        .save()
-        .then(() => {
-          // PDF fertig -> OKLCH Farben wiederherstellen
-          root.style.cssText = '';
-        });
-    }, 1000);
+      window.print();
+    }, 800);
   }
 }
