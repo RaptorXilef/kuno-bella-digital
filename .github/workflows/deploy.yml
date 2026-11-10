@@ -31,10 +31,11 @@ jobs:
         run: sudo apt-get install -y unzip
 
       - name: 🔒 Fragen-Katalog entschlüsseln
+        # WICHTIG: Das Passwort in einfache Anführungszeichen setzen,
+        # damit Sonderzeichen (Klammern, & etc.) nicht als Bash-Befehl gewertet werden!
         run: |
           cd src/assets/data
-          unzip -P ${{ secrets.KUNO_SECRET_PASS }} questions.zip
-          # Löscht das ZIP nach dem Entpacken, damit es nicht im Build landet
+          unzip -P '${{ secrets.KUNO_SECRET_PASS }}' questions.zip
           rm questions.zip
 
       - name: 🛠️ Frontend Assets kompilieren (Vite Build)
@@ -49,9 +50,13 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL }}
           port: ${{ vars.FTP_PORT }}
-          # Das Server-Verzeichnis, z.B. /kunobella/
+
+          # HIER legst du fest, in welchen Ordner auf dem Server es geladen wird.
+          # Wenn du die Variable auf Github gesetzt hast, nutze diese:
           server-dir: ${{ vars.FTP_SERVER_DIR }}
-          # Lädt NUR den kompilierten Build-Ordner hoch, nicht den Quellcode!
+          # ODER schreibe es direkt hart rein, falls du die Variable löschen willst, z.B.:
+          # server-dir: /kunobella/
+
           local-dir: ./dist/
           # Vite macht den dist Ordner schon sauber, wir schließen nur zur Sicherheit Git/Maps aus
           exclude: |
