@@ -18,7 +18,7 @@ export default class FormBuilder {
    * Generiert das komplette HTML und hängt es ins DOM ein.
    */
   build() {
-    this.container.innerHTML = ''; // Container leeren (falls neu geladen wird)
+    this.container.innerHTML = ''; // Container leeren, falls wir neu laden
 
     for (const [categoryName, phases] of Object.entries(this.questionsData)) {
       const categorySection = this.createCategorySection(categoryName, phases);
@@ -80,7 +80,7 @@ export default class FormBuilder {
     const textDiv = document.createElement('div');
     textDiv.className = 'c-question__text';
 
-    // Den Text am "Bsp.:" Umbruch splitten, damit das Beispiel kleiner dargestellt wird
+    // Den Text am Zeilenumbruch splitten, um das "Bsp.:" kleiner darzustellen
     const parts = question.text.split('\n');
     let htmlText = `<strong>${question.id}. ${parts[0]}</strong>`;
     if (parts.length > 1) {
@@ -92,7 +92,7 @@ export default class FormBuilder {
     const optionsDiv = document.createElement('div');
     optionsDiv.className = 'c-question__options';
 
-    // Die festgelegten Antwortmöglichkeiten
+    // Die festgelegten Antwortmöglichkeiten nach Beller
     const options = [
       { value: 'yes', label: 'Tut es' },
       { value: 'partially', label: 'Teilweise' },
@@ -100,27 +100,27 @@ export default class FormBuilder {
       { value: 'unknown', label: 'Weiß nicht' },
     ];
 
+    // Falls wir eine JSON geladen haben, prüfen wir, ob schon etwas ausgewählt war
     const currentAnswer = this.childState.getAnswer(categoryName, phaseName, question.id);
 
     options.forEach((opt) => {
       const btn = document.createElement('button');
-      const isSelected = currentAnswer === opt.value ? 'is-selected' : '';
-      // Nutzung des BEM-Modifiers "--option" und State "is-selected"
-      btn.className = `btn btn--option ${isSelected}`;
+      const isSelectedClass = currentAnswer === opt.value ? 'is-selected' : '';
+      btn.className = `c-button c-button--option ${isSelectedClass}`.trim();
       btn.textContent = opt.label;
       btn.dataset.value = opt.value;
 
       // Klick-Event für die Auswahl
       btn.addEventListener('click', () => {
         // 1. Visuelles Update: "is-selected" bei allen Geschwistern entfernen
-        const siblingButtons = optionsDiv.querySelectorAll('.btn--option');
+        const siblingButtons = optionsDiv.querySelectorAll('.c-button--option');
         for (const sibling of siblingButtons) {
           sibling.classList.remove('is-selected');
         }
-        // Bei sich selbst setzen
+        // 2. Bei sich selbst setzen
         btn.classList.add('is-selected');
 
-        // 2. Im Arbeitsspeicher (ChildState) speichern
+        // 3. Im Arbeitsspeicher (ChildState) speichern
         this.childState.setAnswer(categoryName, phaseName, question.id, opt.value);
       });
 

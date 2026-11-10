@@ -1,6 +1,6 @@
 {
   "name": "@raptorxilef/kuno-bella-digital",
-  "version": "0.0.1",
+  "version": ".0.1",
   "description": "Digitale, datenschutzkonforme Kuno Beller Entwicklungstabelle nach DDD/VSA",
   "type": "module",
   "author": "Felix Maywald <RaptorXilef>",
@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "chart.js": "^4.4.0",
-    "html2pdf.js": "^0.10.1",
-    "uuid": "^10.0.0"
+    "html2pdf.js": "^0.14.0",
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.13",
@@ -51,7 +51,11 @@
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
   },
-  "overrides": {},
+  "overrides": {
+    "deepmerge": ">=4.2.0",
+    "glob": ">=14.0.2",
+    "minimatch": ">=11.0.1"
+  },
   "browserslist": [
     "> 0.5%",
     "last 2 versions",
