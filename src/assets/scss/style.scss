@@ -1,0 +1,256 @@
+:root {
+  /* OKLCH Color Palette */
+  --color-bg: oklch(0.98 0.01 250);
+  --color-surface: oklch(1 0 0);
+  --color-text-main: oklch(0.2 0.05 250);
+  --color-text-muted: oklch(0.5 0.05 250);
+
+  --color-primary: oklch(0.6 0.15 250);
+  --color-primary-hover: oklch(0.55 0.15 250);
+
+  --color-secondary: oklch(0.9 0.02 250);
+  --color-secondary-hover: oklch(0.85 0.02 250);
+
+  --color-success: oklch(0.65 0.15 150);
+  --color-success-hover: oklch(0.6 0.15 150);
+
+  --color-border: oklch(0.9 0.02 250);
+
+  /* Dimensions & Spacing */
+  --radius: 0.5rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, sans-serif;
+  --font-size: 1rem;
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+.l-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+}
+
+.l-container {
+  max-width: 1200px;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ==========================================================================
+   COMPONENTS
+   ========================================================================== */
+
+/* Buttons */
+.c-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: var(--font-size);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &--primary {
+    background-color: var(--color-primary);
+    color: oklch(1 0 0);
+
+    &:hover {
+      background-color: var(--color-primary-hover);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-main);
+
+    &:hover {
+      background-color: var(--color-secondary-hover);
+    }
+  }
+
+  &--success {
+    background-color: var(--color-success);
+    color: oklch(1 0 0);
+
+    &:hover {
+      background-color: var(--color-success-hover);
+    }
+  }
+
+  &--option {
+    background-color: var(--color-surface);
+    color: var(--color-text-main);
+    border: 1px solid var(--color-border);
+    font-weight: 400;
+
+    &:hover {
+      background-color: var(--color-secondary);
+    }
+
+    &.is-selected {
+      background-color: var(--color-primary);
+      color: oklch(1 0 0);
+      border-color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+/* Cards & Forms */
+.c-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+.c-form-group {
+  margin-bottom: var(--spacing-md);
+
+  &__label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: var(--font-size);
+  }
+}
+
+/* Questionnaire Domain */
+.c-category {
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+.c-phase {
+  margin-bottom: var(--spacing-lg);
+
+  &__title {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-main);
+    font-size: 1.25rem;
+  }
+}
+
+.c-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--spacing-lg);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__example {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--color-text-muted);
+  }
+
+  &__options {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+.c-evaluation {
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  &__title {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  &__chart-wrapper {
+    position: relative;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   STATES
+   ========================================================================== */
+.is-hidden {
+  display: none !important;
+}
