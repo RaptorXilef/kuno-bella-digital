@@ -8,7 +8,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    outDir: 'public/dist',
+    outDir: 'dist',
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
