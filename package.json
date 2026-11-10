@@ -1,6 +1,6 @@
 {
   "name": "@raptorxilef/kuno-bella-digital",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Digitale, datenschutzkonforme Kuno Beller Entwicklungstabelle nach DDD/VSA",
   "type": "module",
   "author": "Felix Maywald <RaptorXilef>",

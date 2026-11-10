@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.2](https://github.com/RaptorXilef/kuno-beller-digital/compare/v0.2.1...v0.2.2) (2026-11-10)
+
+### 🐛 Bug Fixes
+
+* **deps:** Resolve high-severity npm audit vulnerabilities via package overrides ([85878d3](https://github.com/RaptorXilef/kuno-beller-digital/commit/85878d353e76569084775de42e76bb61c3cdea55))
+* **deps:** Resolve unpatchable deepmerge vulnerability by upgrading parent package ([7ba31d4](https://github.com/RaptorXilef/kuno-beller-digital/commit/7ba31d4c433de6b97503502007d33d2b01f4385c))
+
+### 📚 Dokumentation
+
+* **data:** add anonymous questions-example.json template for public repository ([ecdc78b](https://github.com/RaptorXilef/kuno-beller-digital/commit/ecdc78b948e6a42a3baaa6c668db496701c2d347))
+* **repo:** add professional documentation, license, governance files and npm overrides ([14f32c3](https://github.com/RaptorXilef/kuno-beller-digital/commit/14f32c3c0f5694d8d7df5b6e62b60483e086592b))
+
 ## [0.2.1](https://github.com/RaptorXilef/kuno-bella-digital/compare/v0.2.0...v0.2.1) (2026-11-10)
 
 ### 🐛 Bug Fixes
