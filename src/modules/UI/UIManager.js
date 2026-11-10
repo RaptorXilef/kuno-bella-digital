@@ -54,6 +54,9 @@ export default class UIManager {
         const recoveredState = ChildState.loadFromStorage();
         if (recoveredState) {
           this.currentChildState = recoveredState;
+          // FIX: FormBuilder muss hier zwingend aufgerufen werden!
+          this.formBuilder = new FormBuilder('question-container', this.currentChildState, this.questionsData);
+          this.formBuilder.build();
           this.startAssessment();
         }
       } else {
@@ -414,7 +417,7 @@ export default class UIManager {
         scales: {
           y: {
             beginAtZero: true,
-            max: 14,
+            max: 15,
             title: { display: true, text: 'Phasen', font: { size: 14, weight: 'bold' } },
             ticks: {
               stepSize: 0.1, // 0.1er Schritte erzwingen
