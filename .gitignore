@@ -58,6 +58,7 @@ vendor/
 
 # Stammverzeichnis Dateien
 _notizen/
+dist/
 .env
 deptrac.yaml
 LICENSE.md
