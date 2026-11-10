@@ -224,11 +224,12 @@ export default class UIManager {
 
   generateOverviewGrid() {
     const evalLogic = new Evaluation(this.currentChildState, this.questionsData);
+    const metrics = evalLogic.calculateAllMetrics(); // Die neuen Metriken laden
     let html = '<h2 class="c-overview__title">Schnellübersicht</h2>';
 
     for (const [categoryName, phases] of Object.entries(this.questionsData)) {
       html += `<div class="c-overview__category">`;
-      html += `<h3 class="c-overview__category-title">${categoryName}</h3>`;
+      html += `<h3 class="c-overview__category-title">${categoryName} (Score: ${metrics[categoryName].score} | Basis: ${metrics[categoryName].basis} | Decke: ${metrics[categoryName].decke})</h3>`;
       html += `<table class="c-overview__table">`;
 
       // Finde max. Fragenanzahl
@@ -240,17 +241,16 @@ export default class UIManager {
       phaseKeys.forEach((p) => (html += `<th>${p.replace('PHASE ', '')}</th>`));
       html += '</tr></thead><tbody>';
 
-      // PUNKTZAHL REIHE
+      // PUNKTZAHL REIHE (bereinigte Werte)
       html += '<tr class="is-score"><td>Punkte</td>';
-      phaseKeys.forEach((p) => {
-        const answersInPhase = phases[p].map((q) => this.currentChildState.getAnswer(categoryName, p, q.id));
-        const pts = evalLogic.calculatePhasePoints(answersInPhase, phases[p].length);
-        html += `<td>${pts > 0 ? evalLogic.roundScore(pts) : ''}</td>`;
+      phaseKeys.forEach((p, index) => {
+        const phaseVal = metrics[categoryName].rawPhaseScores[index];
+        html += `<td>${phaseVal > 0 ? evalLogic.roundScore(phaseVal) : '0'}</td>`;
       });
       html += '</tr>';
 
       // FRAGEN REIHEN
-      const aMap = { yes: '1', partially: '0.5', no: '0', unknown: '0' };
+      const aMap = { yes: '1', partially: '0.5', no: '0', unknown: 'W' };
       for (let i = 0; i < maxQ; i++) {
         html += `<tr><td>F ${i + 1}</td>`;
         phaseKeys.forEach((p) => {
@@ -284,10 +284,10 @@ export default class UIManager {
 
     // Render Chart
     const evalLogic = new Evaluation(this.currentChildState, this.questionsData);
-    const chartData = evalLogic.getChartData();
+    const metrics = evalLogic.calculateAllMetrics();
 
     const ageInMonths = this.currentChildState.getAgeInMonths();
-    // Deckelt das Alter strikt auf max 14 (wie gewünscht!)
+    // Deckelt das Alter strikt auf max 14
     const bellerPhaseAge = Math.min(14, Evaluation.convertMonthsToPhase(ageInMonths));
 
     // Metadaten anzeigen
@@ -305,21 +305,23 @@ export default class UIManager {
       this.chartInstance.destroy();
     }
 
-    const len = chartData.labels.length;
-    const lineDurchschnitt = Array(len).fill(bellerPhaseAge);
-    // Auch Basis und Decke strikt zwischen 0 und 14 limitieren
-    const lineBasis = Array(len).fill(Math.max(0, bellerPhaseAge - 1.5));
-    const lineDecke = Array(len).fill(Math.min(14, bellerPhaseAge + 1.5));
+    const labels = Object.keys(metrics);
+    // Wir ziehen die individuellen Werte aus der neuen Auswertungs-Logik
+    const dataErreicht = labels.map((l) => metrics[l].score);
+    const dataBasis = labels.map((l) => metrics[l].basis);
+    const dataDecke = labels.map((l) => metrics[l].decke);
 
-    // 4. Neues Balkendiagramm zeichnen
+    // Lebensalter ist eine gerade Konstante durch alle Kategorien
+    const lineLebensalter = Array(labels.length).fill(bellerPhaseAge);
+
     this.chartInstance = new Chart(this.elements.chartCanvas, {
       type: 'bar',
       data: {
-        labels: chartData.labels,
+        labels: labels,
         datasets: [
           {
             label: 'Erreicht',
-            data: chartData.dataset,
+            data: dataErreicht,
             backgroundColor: 'rgba(54, 162, 235, 0.6)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
@@ -329,18 +331,19 @@ export default class UIManager {
           {
             type: 'line',
             label: 'Decke',
-            data: lineDecke,
+            data: dataDecke,
             borderColor: 'rgba(75, 192, 192, 1)',
             borderDash: [2, 2],
             borderWidth: 2,
-            pointRadius: 0,
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
             fill: false,
             order: 1,
           },
           {
             type: 'line',
-            label: 'Lebensalter (Phase)',
-            data: lineDurchschnitt,
+            label: 'Lebensalter',
+            data: lineLebensalter,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderDash: [5, 5],
             borderWidth: 3,
@@ -351,11 +354,12 @@ export default class UIManager {
           {
             type: 'line',
             label: 'Basis',
-            data: lineBasis,
+            data: dataBasis,
             borderColor: 'rgba(255, 159, 64, 1)',
             borderDash: [2, 2],
             borderWidth: 2,
-            pointRadius: 0,
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(255, 159, 64, 1)',
             fill: false,
             order: 3,
           },

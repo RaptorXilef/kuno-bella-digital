@@ -35,7 +35,9 @@
     "fix:css": "stylelint \"src/assets/scss/**/*.scss\" --fix",
     "// --- MASTER COMMANDS ---": "",
     "chk": "npm run chk:biome && npm run chk:css && npm run chk:html && npm run test",
-    "fix": "npm run fix:biome && npm run fix:css"
+    "fix": "npm run fix:biome && npm run fix:css",
+    "// --- PHASE 5: RELEASE & CI ---": "",
+    "release": "release-it"
   },
   "dependencies": {
     "chart.js": "^4.4.0",
@@ -45,15 +47,19 @@
     "@biomejs/biome": "2.4.13",
     "@cspell/dict-de-de": "^4.1.2",
     "@markuplint/html-spec": "5.5.0",
+    "@release-it/conventional-changelog": "^12.0.0",
     "@vitest/ui": "^4.1.5",
+    "conventional-changelog-conventionalcommits": "^10.2.1",
+    "conventional-changelog": "^8.1.0",
     "cspell": "^10.0.0",
     "markuplint": "5.5.0",
+    "release-it": "^21.0.1",
     "sass-embedded": "^1.99.0",
-    "stylelint": "^17.9.0",
     "stylelint-config-recess-order": "^7.7.0",
     "stylelint-config-standard-scss": "^17.0.0",
     "stylelint-declaration-strict-value": "^1.12.1",
     "stylelint-order": "^8.1.1",
+    "stylelint": "^17.9.0",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
   },
