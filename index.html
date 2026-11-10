@@ -28,9 +28,9 @@
     </header>
 
     <main class="l-container">
-        <!-- Setup -->
+        <!-- Setup (Wird auch zum Editieren genutzt) -->
         <section id="setup-section" class="c-card">
-            <h2 class="c-card__title">Kind anlegen</h2>
+            <h2 class="c-card__title" id="setup-title">Kind anlegen</h2>
             <div class="c-form-group">
                 <label class="c-form-group__label" for="child-name">Vorname / Kürzel</label>
                 <input class="c-form-group__input" type="text" id="child-name" placeholder="z.B. Max M.">
@@ -43,13 +43,16 @@
                 <label class="c-form-group__label" for="child-date">Datum der Beobachtung</label>
                 <input class="c-form-group__input" type="date" id="child-date">
             </div>
-            <button type="button" id="start-assessment" class="c-button c-button--primary">Beobachtung starten</button>
+            <button type="button" id="start-assessment" class="c-button c-button--primary">Speichern & Weiter</button>
         </section>
 
         <!-- Diagramm -->
         <section id="evaluation-section" class="c-evaluation is-hidden">
-            <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
-            <div class="c-evaluation__meta" id="eval-meta"></div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
+                <button type="button" id="edit-meta-btn" class="c-button c-button--secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Metadaten bearbeiten</button>
+            </div>
+            <div class="c-evaluation__meta" id="eval-meta" style="margin-bottom: 1rem;"></div>
             <div class="c-evaluation__chart-wrapper">
                 <canvas id="kuno-chart"></canvas>
             </div>

@@ -28,8 +28,10 @@ export default class UIManager {
       exportPdfQuestBtn: document.getElementById('export-pdf-quest'),
       newAssessmentBtn: document.getElementById('new-assessment'),
       endSessionBtn: document.getElementById('end-session'),
+      editMetaBtn: document.getElementById('edit-meta-btn'),
 
       setupSection: document.getElementById('setup-section'),
+      setupTitle: document.getElementById('setup-title'),
       childNameInput: document.getElementById('child-name'),
       childBirthdateInput: document.getElementById('child-birthdate'),
       childDateInput: document.getElementById('child-date'),
@@ -92,9 +94,36 @@ export default class UIManager {
         return;
       }
 
-      this.currentChildState = new ChildState(name, birthdate, date);
+      // Wenn bereits ein ChildState existiert (Edit-Modus), patchen wir ihn nur,
+      // anstatt ihn neu zu überschreiben, damit die Antworten erhalten bleiben!
+      if (this.currentChildState) {
+        this.currentChildState.name = name;
+        this.currentChildState.birthdate = birthdate;
+        this.currentChildState.date = date;
+        // Wenn wir vom Diagramm aus bearbeiten, updaten wir das Diagramm sofort!
+        if (!this.elements.evaluationSection.classList.contains('is-hidden')) {
+          this.generateEvaluation();
+        }
+      } else {
+        this.currentChildState = new ChildState(name, birthdate, date);
+        this.formBuilder = new FormBuilder('question-container', this.currentChildState, this.questionsData);
+        this.formBuilder.build();
+      }
+
       this.currentChildState.saveToStorage();
       this.startAssessment();
+    });
+
+    // "Metadaten bearbeiten" Button im Diagramm
+    this.elements.editMetaBtn.addEventListener('click', () => {
+      this.elements.setupTitle.textContent = 'Metadaten bearbeiten';
+      this.elements.childNameInput.value = this.currentChildState.name;
+      this.elements.childBirthdateInput.value = this.currentChildState.birthdate;
+      this.elements.childDateInput.value = this.currentChildState.date;
+
+      this.elements.setupSection.classList.remove('is-hidden');
+      // Wir scrollen smooth nach oben zum Bearbeiten
+      this.elements.setupSection.scrollIntoView({ behavior: 'smooth' });
     });
 
     // Laufende Arbeit verwerfen und Neu Starten
@@ -121,6 +150,8 @@ export default class UIManager {
         if (importedState) {
           this.currentChildState = importedState;
           this.currentChildState.saveToStorage(); // Geladene JSON in den Cache legen
+          this.formBuilder = new FormBuilder('question-container', this.currentChildState, this.questionsData);
+          this.formBuilder.build();
           this.startAssessment();
         }
       };
@@ -186,10 +217,6 @@ export default class UIManager {
     this.elements.endSessionBtn.classList.remove('is-hidden');
 
     this.elements.currentChildName.textContent = this.currentChildState.name;
-
-    // Formular aufbauen
-    this.formBuilder = new FormBuilder('question-container', this.currentChildState, this.questionsData);
-    this.formBuilder.build();
   }
 
   resetToSetup() {
@@ -198,6 +225,7 @@ export default class UIManager {
 
     // UI zurücksetzen
     this.elements.currentChildName.textContent = 'Keines ausgewählt';
+    this.elements.setupTitle.textContent = 'Kind anlegen';
     this.elements.setupSection.classList.remove('is-hidden');
     this.elements.assessmentSection.classList.add('is-hidden');
     this.elements.evaluationSection.classList.add('is-hidden');
@@ -287,8 +315,8 @@ export default class UIManager {
     const metrics = evalLogic.calculateAllMetrics();
 
     const ageInMonths = this.currentChildState.getAgeInMonths();
-    // Deckelt das Alter strikt auf max 14
-    const bellerPhaseAge = Math.min(14, Evaluation.convertMonthsToPhase(ageInMonths));
+    // Hier greift nun die reparierte Logik, die 5 Jahre alt = Phase 14 liefert!
+    const bellerPhaseAge = Evaluation.convertMonthsToPhase(ageInMonths);
 
     // Metadaten anzeigen
     this.elements.evalMeta.innerHTML = `
@@ -341,8 +369,9 @@ export default class UIManager {
             order: 1,
           },
           {
+            // DURCHSCHNITTS-LINIE IST JETZT AKTIV!
             type: 'line',
-            label: 'Lebensalter',
+            label: 'Lebensalter (Durchschnitt)',
             data: lineLebensalter,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderDash: [5, 5],
@@ -371,17 +400,26 @@ export default class UIManager {
         scales: {
           y: {
             beginAtZero: true,
-            max: 14, // Da wir 14 Phasen haben
+            max: 15, // Etwas Puffer über 14 für den .5er Cutoff
             title: { display: true, text: 'Phasen', font: { size: 14, weight: 'bold' } },
-            ticks: { stepSize: 0.1, callback: (v) => (Number.isInteger(v) ? v : null) },
+            ticks: {
+              stepSize: 0.1, // 0.1er Schritte erzwingen
+              callback: (value) => {
+                // Die Achse soll nur Zahlen beschriften, bei 1.0, 2.0, 3.0 etc.
+                // Um float-math-Fehler zu umgehen (1.000000001), runden wir auf 1 Nachkommastelle
+                const rounded = Math.round(value * 10) / 10;
+                return Number.isInteger(rounded) ? rounded : null;
+              },
+            },
             grid: {
               // Zeichnet die Linien im Hintergrund (0.1 bis 0.9)
-              color: (ctx) => {
-                if (ctx.tick.value === 0) return 'rgba(0, 0, 0, 0.5)';
-                if (Number.isInteger(ctx.tick.value)) return 'rgba(0, 0, 0, 0.3)';
-                // Die .5er Mitte (Halbe Phase) etwas dunkler hervorheben
-                if ((ctx.tick.value * 10) % 10 === 5) return 'rgba(0, 0, 0, 0.15)';
-                // Die 9 kleinen Zwischenstriche (0.1, 0.2...) sehr dezent
+              color: (context) => {
+                const rounded = Math.round(context.tick.value * 10) / 10;
+                if (rounded === 0) return 'rgba(0, 0, 0, 0.5)'; // Dicke 0 Linie
+                if (Number.isInteger(rounded)) {
+                  return 'rgba(0, 0, 0, 0.4)'; // Dickere Linie bei 1, 2, 3...
+                }
+                // Super feine Hilfslinien bei 0.1, 0.2, 0.3...
                 return 'rgba(0, 0, 0, 0.05)';
               },
             },

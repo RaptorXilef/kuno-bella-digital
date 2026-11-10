@@ -85,10 +85,9 @@ export default class Evaluation {
    * @returns {number} Punkte (z.B. 1.0, 0.5)
    */
   calculatePhasePoints(answers) {
-    let yes = 0;
-    let partially = 0;
-    let unknownOrNull = 0;
-
+    let yes = 0,
+      partially = 0,
+      unknownOrNull = 0;
     answers.forEach((answer) => {
       if (answer === 'yes') yes++;
       else if (answer === 'partially') partially++;
@@ -96,9 +95,7 @@ export default class Evaluation {
     });
 
     const totalValidQuestions = answers.length - unknownOrNull;
-
     if (totalValidQuestions === 0) return 0; // Wenn alles "weiß nicht" ist
-
     return (yes * 1 + partially * 0.5) / totalValidQuestions;
   }
 
@@ -116,7 +113,7 @@ export default class Evaluation {
     if (months <= 3) return 3;
     if (months <= 4) return 4;
     if (months <= 5) return 5;
-    // Approximation / Interpolation für größere Stufen
+    // Approximation der Phasen 6-12 (immer größere Sprünge)
     if (months <= 7) return 6 + (months - 5) / 2;
     if (months <= 9) return 7 + (months - 7) / 2;
     if (months <= 11) return 8 + (months - 9) / 2;
@@ -124,8 +121,14 @@ export default class Evaluation {
     if (months <= 21) return 10 + (months - 15) / 6;
     if (months <= 28) return 11 + (months - 21) / 7;
     if (months <= 36) return 12 + (months - 28) / 8;
+    // Phase 13 = 37 bis 48 Monate
     if (months <= 48) return 13 + (months - 36) / 12;
-    if (months <= 72) return 14 + (months - 48) / 24;
-    return 14; // Maximal Phase 14
+    // Phase 14 = ab 49 Monaten (bis 72). Wenn Kind 5 Jahre (60 Monate) ist,
+    // wird es hier korrekt in Phase 14 einsortiert!
+    if (months > 48) {
+      const phase = 14 + (months - 48) / 24;
+      return phase > 14.9 ? 14.9 : phase; // Maximal Phase 14.9 zeichnen, damit die Linie nicht aus dem Canvas springt
+    }
+    return 14;
   }
 }
