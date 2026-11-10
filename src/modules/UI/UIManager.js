@@ -16,6 +16,7 @@ export default class UIManager {
 
     this.cacheDOM();
     this.bindEvents();
+    this.checkRecovery();
   }
 
   cacheDOM() {
@@ -24,6 +25,8 @@ export default class UIManager {
       uploadJsonInput: document.getElementById('upload-json'),
       saveJsonBtn: document.getElementById('save-json'),
       exportPdfBtn: document.getElementById('export-pdf'),
+      newAssessmentBtn: document.getElementById('new-assessment'),
+      endSessionBtn: document.getElementById('end-session'),
 
       setupSection: document.getElementById('setup-section'),
       childNameInput: document.getElementById('child-name'),
@@ -38,8 +41,25 @@ export default class UIManager {
     };
   }
 
+  /**
+   * Prüft beim Start, ob ein Auto-Save (Absturz, Reload) vorliegt
+   */
+  checkRecovery() {
+    if (ChildState.hasBackup()) {
+      if (confirm('Es wurde ein ungespeicherter Zwischenstand gefunden. Möchtest du ihn wiederherstellen?')) {
+        const recoveredState = ChildState.loadFromStorage();
+        if (recoveredState) {
+          this.currentChildState = recoveredState;
+          this.startAssessment();
+        }
+      } else {
+        ChildState.clearStorage();
+      }
+    }
+  }
+
   bindEvents() {
-    // Neues Kind anlegen
+    // Neues Kind anlegen (Setup starten)
     this.elements.startAssessmentBtn.addEventListener('click', () => {
       const name = this.elements.childNameInput.value.trim();
       const date = this.elements.childDateInput.value;
@@ -50,7 +70,27 @@ export default class UIManager {
       }
 
       this.currentChildState = new ChildState(name, date);
+      this.currentChildState.saveToStorage(); // Initiales Auto-Save
       this.startAssessment();
+    });
+
+    // Laufende Arbeit verwerfen und Neu Starten
+    this.elements.newAssessmentBtn.addEventListener('click', () => {
+      if (this.currentChildState) {
+        if (
+          !confirm('Achtung: Dein aktueller Verlauf geht verloren! Hast du ihn als JSON heruntergeladen? Fortfahren?')
+        ) {
+          return;
+        }
+      }
+      this.resetToSetup();
+    });
+
+    // Sitzung beenden (Löscht den Cache und geht zum Setup)
+    this.elements.endSessionBtn.addEventListener('click', () => {
+      if (confirm('Möchtest du die Sitzung wirklich beenden? Alle Daten werden vom Gerät gelöscht.')) {
+        this.resetToSetup();
+      }
     });
 
     // Vorhandenes Kind laden (JSON Upload)
@@ -63,18 +103,18 @@ export default class UIManager {
         const importedState = ChildState.importJSON(e.target.result);
         if (importedState) {
           this.currentChildState = importedState;
+          this.currentChildState.saveToStorage(); // Geladene JSON in den Cache legen
           this.startAssessment();
         }
       };
       reader.readAsText(file);
+      // Input zurücksetzen, falls die gleiche Datei nochmals gewählt wird
+      event.target.value = '';
     });
 
     // Zwischenspeichern (JSON Download)
     this.elements.saveJsonBtn.addEventListener('click', () => {
-      if (!this.currentChildState) {
-        alert('Es ist aktuell kein Kind zur Bearbeitung geöffnet.');
-        return;
-      }
+      if (!this.currentChildState) return;
 
       const jsonString = this.currentChildState.exportJSON();
       const blob = new Blob([jsonString], { type: 'application/json' });
@@ -86,6 +126,9 @@ export default class UIManager {
       a.click();
 
       URL.revokeObjectURL(url);
+
+      // Da der Nutzer aktiv gespeichert hat, können wir das Backup leeren
+      ChildState.clearStorage();
     });
 
     // Auswerten & PDF Export
@@ -98,12 +141,43 @@ export default class UIManager {
     // UI umschalten (is-hidden nach BEM)
     this.elements.setupSection.classList.add('is-hidden');
     this.elements.assessmentSection.classList.remove('is-hidden');
+
+    // Aktions-Buttons einblenden
+    this.elements.saveJsonBtn.classList.remove('is-hidden');
     this.elements.exportPdfBtn.classList.remove('is-hidden');
+    this.elements.endSessionBtn.classList.remove('is-hidden');
+
     this.elements.currentChildName.textContent = this.currentChildState.name;
 
     // Formular aufbauen
     this.formBuilder = new FormBuilder('question-container', this.currentChildState, this.questionsData);
     this.formBuilder.build();
+  }
+
+  resetToSetup() {
+    this.currentChildState = null;
+    ChildState.clearStorage();
+
+    // UI zurücksetzen
+    this.elements.currentChildName.textContent = 'Keines ausgewählt';
+    this.elements.setupSection.classList.remove('is-hidden');
+    this.elements.assessmentSection.classList.add('is-hidden');
+    this.elements.evaluationSection.classList.add('is-hidden');
+
+    // Aktions-Buttons ausblenden
+    this.elements.saveJsonBtn.classList.add('is-hidden');
+    this.elements.exportPdfBtn.classList.add('is-hidden');
+    this.elements.endSessionBtn.classList.add('is-hidden');
+
+    // Formular-Felder leeren
+    this.elements.childNameInput.value = '';
+    this.elements.childDateInput.value = '';
+    document.getElementById('question-container').innerHTML = '';
+
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+      this.chartInstance = null;
+    }
   }
 
   generateEvaluationAndPdf() {
@@ -128,7 +202,7 @@ export default class UIManager {
         labels: chartData.labels,
         datasets: [
           {
-            label: 'Entwicklungsalter (in Phasen)',
+            label: 'Entwicklungsalter (in Phasen/Monaten)',
             data: chartData.dataset,
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
             borderColor: 'rgba(54, 162, 235, 1)',
@@ -147,7 +221,7 @@ export default class UIManager {
       },
     });
 
-    // 5. PDF Generierung anstoßen (Timeout gibt dem Chart Zeit für die Render-Animation)
+    // PDF Generierung (Timeout für die Canvas-Animation)
     setTimeout(() => {
       const opt = {
         margin: 10,

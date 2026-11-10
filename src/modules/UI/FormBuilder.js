@@ -32,6 +32,8 @@ export default class FormBuilder {
   createCategorySection(categoryName, phases) {
     const section = document.createElement('section');
     section.className = 'c-category';
+    // WICHTIG für das SCSS: Wir übergeben den Namen als Attribut für die Bereichsfarbe
+    section.setAttribute('data-category', categoryName);
 
     const title = document.createElement('h2');
     title.className = 'c-category__title';
@@ -108,6 +110,7 @@ export default class FormBuilder {
       const isSelectedClass = currentAnswer === opt.value ? 'is-selected' : '';
       btn.className = `c-button c-button--option ${isSelectedClass}`.trim();
       btn.textContent = opt.label;
+      // WICHTIG für SCSS: Data-Value steuert die Farbe (rot, grün, blau, grau)
       btn.dataset.value = opt.value;
 
       // Klick-Event für die Auswahl
@@ -119,8 +122,7 @@ export default class FormBuilder {
         }
         // 2. Bei sich selbst setzen
         btn.classList.add('is-selected');
-
-        // 3. Im Arbeitsspeicher (ChildState) speichern
+        // Das speichert den Wert und löst automatisch das LocalStorage-Auto-Save aus!
         this.childState.setAnswer(categoryName, phaseName, question.id, opt.value);
       });
 

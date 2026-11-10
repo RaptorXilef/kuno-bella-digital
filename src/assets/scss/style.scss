@@ -1,5 +1,5 @@
 :root {
-  /* OKLCH Color Palette */
+  /* Basis OKLCH Color Palette */
   --color-bg: oklch(98% 0.01 250deg);
   --color-surface: oklch(100% 0 0deg);
   --color-text-main: oklch(20% 0.05 250deg);
@@ -10,6 +10,10 @@
   --color-secondary-hover: oklch(85% 0.02 250deg);
   --color-success: oklch(65% 0.15 150deg);
   --color-success-hover: oklch(60% 0.15 150deg);
+  --color-danger: oklch(60% 0.15 20deg);
+  --color-danger-hover: oklch(55% 0.15 20deg);
+  --color-neutral: oklch(60% 0.02 250deg);
+  --color-neutral-hover: oklch(55% 0.02 250deg);
   --color-border: oklch(90% 0.02 250deg);
 
   /* Dimensions & Spacing */
@@ -118,6 +122,15 @@ body {
     }
   }
 
+  &--danger {
+    color: oklch(100% 0 0deg);
+    background-color: var(--color-danger);
+
+    &:hover {
+      background-color: var(--color-danger-hover);
+    }
+  }
+
   &--option {
     font-weight: 400;
     color: var(--color-text-main);
@@ -131,8 +144,27 @@ body {
     &.is-selected {
       font-weight: 600;
       color: oklch(100% 0 0deg);
-      background-color: var(--color-primary);
-      border-color: var(--color-primary);
+
+      /* Dynamische Farben je nach Antwort-Typ */
+      &[data-value='yes'] {
+        background-color: var(--color-success);
+        border-color: var(--color-success);
+      }
+
+      &[data-value='partially'] {
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+      }
+
+      &[data-value='no'] {
+        background-color: var(--color-danger);
+        border-color: var(--color-danger);
+      }
+
+      &[data-value='unknown'] {
+        background-color: var(--color-neutral);
+        border-color: var(--color-neutral);
+      }
     }
   }
 }
@@ -169,19 +201,57 @@ body {
   }
 }
 
-/* Questionnaire Domain */
+/* Questionnaire Domain mit dynamischen Bereichsfarben */
 .c-category {
+  /* Fallback Farbe, falls keine gematched wird */
+  --cat-color: var(--color-primary);
+  --cat-bg: var(--color-surface);
+
+  /* Die 8 Entwicklungsbereiche mit eigenen OKLCH Farben */
+  &[data-category='Körperpflege'] {
+    --cat-color: oklch(60% 0.15 20deg);
+    --cat-bg: oklch(98% 0.02 20deg);
+  } /* Rot-Ton */
+  &[data-category='Umgebungsbewusstsein'] {
+    --cat-color: oklch(60% 0.1 200deg);
+    --cat-bg: oklch(98% 0.02 200deg);
+  } /* Türkis-Ton */
+  &[data-category='Sozial-Emotionale Entwicklung'] {
+    --cat-color: oklch(65% 0.15 70deg);
+    --cat-bg: oklch(98% 0.03 70deg);
+  } /* Orange-Ton */
+  &[data-category='Spieltätigkeit'] {
+    --cat-color: oklch(50% 0.2 300deg);
+    --cat-bg: oklch(98% 0.02 300deg);
+  } /* Lila-Ton */
+  &[data-category='Sprache'] {
+    --cat-color: oklch(50% 0.15 250deg);
+    --cat-bg: oklch(98% 0.02 250deg);
+  } /* Blau-Ton */
+  &[data-category='Kognition'] {
+    --cat-color: oklch(40% 0.1 280deg);
+    --cat-bg: oklch(98% 0.02 280deg);
+  } /* Indigo-Ton */
+  &[data-category='Grobmotorik'] {
+    --cat-color: oklch(55% 0.15 140deg);
+    --cat-bg: oklch(98% 0.03 140deg);
+  } /* Waldgrün */
+  &[data-category='Feinmotorik'] {
+    --cat-color: oklch(70% 0.15 120deg);
+    --cat-bg: oklch(98% 0.03 120deg);
+  } /* Hellgrün/Lime */
+
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
-  background-color: var(--color-surface);
+  background-color: var(--cat-bg);
   border-radius: var(--radius);
   box-shadow: 0 4px 6px rgb(0 0 0 / 0.05);
 
   &__title {
     padding-bottom: var(--spacing-sm);
     margin-bottom: var(--spacing-lg);
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-border);
+    color: var(--cat-color);
+    border-bottom: 2px solid var(--cat-color);
   }
 }
 

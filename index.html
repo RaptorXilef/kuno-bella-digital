@@ -11,14 +11,16 @@
     <header class="l-header">
         <div class="l-header__content">
             <div class="c-child-info">
-                Aktuelles Kind: <strong id="current-child-name">Neues Kind (Ungespeichert)</strong>
+                Aktuelles Kind: <strong id="current-child-name">Keines ausgewählt</strong>
             </div>
             <div class="l-header__actions">
+                <button id="new-assessment" class="c-button c-button--secondary">Neu starten</button>
                 <label class="c-button c-button--secondary">
-                    Laden (JSON) <input type="file" id="upload-json" accept=".json" hidden>
+                    JSON Laden <input type="file" id="upload-json" accept=".json" hidden>
                 </label>
-                <button id="save-json" class="c-button c-button--primary">Zwischenspeichern</button>
+                <button id="save-json" class="c-button c-button--primary is-hidden">Download (JSON)</button>
                 <button id="export-pdf" class="c-button c-button--success is-hidden">Auswerten & PDF</button>
+                <button id="end-session" class="c-button c-button--danger is-hidden">Sitzung beenden</button>
             </div>
         </div>
     </header>

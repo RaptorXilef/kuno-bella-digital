@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Repräsentiert den aktuellen Zustand und die Daten eines Kindes.
- * Verwaltet den Import, Export und die Speicherung der Antworten im Arbeitsspeicher.
+ * Verwaltet den Import, Export und die Speicherung im LocalStorage (Auto-Save).
  */
 export default class ChildState {
   /**
@@ -20,7 +20,7 @@ export default class ChildState {
   }
 
   /**
-   * Speichert eine Antwort.
+   * Speichert eine Antwort und triggert sofort den Auto-Save.
    * @param {string} category Entwicklungsbereich (z.B. Körperpflege)
    * @param {string} phase Entwicklungsphase (z.B. PHASE 1)
    * @param {number} questionId ID der Frage
@@ -34,6 +34,9 @@ export default class ChildState {
       this.answers[category][phase] = {};
     }
     this.answers[category][phase][questionId] = answer;
+
+    // Echtzeit Auto-Save in den Browser-Cache
+    this.saveToStorage();
   }
 
   /**
@@ -81,5 +84,27 @@ export default class ChildState {
       alert('Die Datei konnte nicht gelesen werden. Ist es eine gültige Kuno Beller JSON?');
       return null;
     }
+  }
+
+  // --- Notfallsicherung (Auto-Save System) ---
+
+  saveToStorage() {
+    localStorage.setItem('kuno_backup', this.exportJSON());
+  }
+
+  static clearStorage() {
+    localStorage.removeItem('kuno_backup');
+  }
+
+  static hasBackup() {
+    return localStorage.getItem('kuno_backup') !== null;
+  }
+
+  static loadFromStorage() {
+    const backup = localStorage.getItem('kuno_backup');
+    if (backup) {
+      return ChildState.importJSON(backup);
+    }
+    return null;
   }
 }
