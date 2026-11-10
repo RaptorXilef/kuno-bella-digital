@@ -8,37 +8,47 @@
 </head>
 <body>
     <!-- Feste Leiste oben (Punkt 3 deiner Anforderungen) -->
-    <header class="sticky-header">
-        <div class="header-content">
-            <div class="child-info">
+    <header class="l-header">
+        <div class="l-header__content">
+            <div class="c-child-info">
                 Aktuelles Kind: <strong id="current-child-name">Neues Kind (Ungespeichert)</strong>
             </div>
-            <div class="actions">
-                <label class="btn btn-secondary">
+            <div class="l-header__actions">
+                <label class="c-button c-button--secondary">
                     Laden (JSON) <input type="file" id="upload-json" accept=".json" hidden>
                 </label>
-                <button id="save-json" class="btn btn-primary">Zwischenspeichern (Download)</button>
+                <button id="save-json" class="c-button c-button--primary">Zwischenspeichern</button>
+                <button id="export-pdf" class="c-button c-button--success is-hidden">Auswerten & PDF</button>
             </div>
         </div>
     </header>
 
-    <main class="container">
+    <!-- Dieser Bereich wird später in das PDF exportiert -->
+    <main id="pdf-content" class="l-container">
         <!-- Startbildschirm: Neues Kind anlegen -->
-        <section id="setup-section" class="card">
-            <h2>Kind anlegen</h2>
-            <div class="form-group">
-                <label for="child-name">Vorname / Kürzel</label>
-                <input type="text" id="child-name" placeholder="z.B. Max M.">
+        <section id="setup-section" class="c-card">
+            <h2 class="c-card__title">Kind anlegen</h2>
+            <div class="c-form-group">
+                <label class="c-form-group__label" for="child-name">Vorname / Kürzel</label>
+                <input class="c-form-group__input" type="text" id="child-name" placeholder="z.B. Max M.">
             </div>
-            <div class="form-group">
-                <label for="child-date">Beobachtungsdatum</label>
-                <input type="date" id="child-date">
+            <div class="c-form-group">
+                <label class="c-form-group__label" for="child-date">Beobachtungsdatum</label>
+                <input class="c-form-group__input" type="date" id="child-date">
             </div>
-            <button id="start-assessment" class="btn btn-primary">Beobachtung starten</button>
+            <button id="start-assessment" class="c-button c-button--primary">Beobachtung starten</button>
         </section>
 
-        <!-- Hier werden die Fragen dynamisch reingeladen -->
-        <section id="assessment-section" class="hidden">
+        <!-- Diagramm Sektion (wird erst bei Klick auf Auswerten sichtbar) -->
+        <section id="evaluation-section" class="c-evaluation is-hidden">
+            <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
+            <div class="c-evaluation__chart-wrapper">
+                <canvas id="kuno-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Fragen-Katalog -->
+        <section id="assessment-section" class="is-hidden">
             <div id="question-container"></div>
         </section>
     </main>
