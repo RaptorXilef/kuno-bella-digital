@@ -60,10 +60,25 @@ export default class UIManager {
     }
   }
 
+  /**
+   * Injiziert dynamisch eine Print-Style-Regel, um zwischen Hoch- und Querformat zu wechseln
+   */
+  injectPrintStyle(cssRule) {
+    let style = document.getElementById('dynamic-print-style');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'dynamic-print-style';
+      document.head.appendChild(style);
+    }
+    style.innerHTML = cssRule;
+  }
+
   bindEvents() {
     // Bereinigt die Print-Klassen, wenn der native PDF Dialog geschlossen wird
     window.addEventListener('afterprint', () => {
       document.body.classList.remove('print-eval', 'print-quest');
+      const printStyle = document.getElementById('dynamic-print-style');
+      if (printStyle) printStyle.remove();
     });
 
     // Neues Kind anlegen (Setup starten)
@@ -136,17 +151,25 @@ export default class UIManager {
       ChildState.clearStorage();
     });
 
+    // 1. Klick auf Auswerten generiert die Daten im Browser
     this.elements.evaluateBtn.addEventListener('click', () => {
       this.generateEvaluation();
     });
 
-    // Auswerten & PDF Export
+    // 2. Klick auf "PDF: Auswertung" -> QUERFORMAT
     this.elements.exportPdfEvalBtn.addEventListener('click', () => {
+      this.injectPrintStyle('@page { size: A4 landscape; margin: 1cm; }');
       document.body.classList.add('print-eval');
-      window.print();
+
+      // Chart muss sich auf das neue Querformat-Verhältnis anpassen
+      if (this.chartInstance) this.chartInstance.resize();
+
+      setTimeout(() => window.print(), 300);
     });
 
+    // 3. Klick auf "PDF: Katalog" -> HOCHFORMAT
     this.elements.exportPdfQuestBtn.addEventListener('click', () => {
+      this.injectPrintStyle('@page { size: A4 portrait; margin: 1cm; }');
       document.body.classList.add('print-quest');
       window.print();
     });
@@ -252,7 +275,7 @@ export default class UIManager {
   generateEvaluation() {
     if (!this.currentChildState) return;
 
-    // Zeigt die PDF Buttons, lässt den Evaluate Button aber da (zum erneuten Aktualisieren!)
+    // Button bleibt stehen für Updates, Export-Buttons tauchen rechts daneben auf!
     this.elements.exportPdfEvalBtn.classList.remove('is-hidden');
     this.elements.exportPdfQuestBtn.classList.remove('is-hidden');
 
@@ -264,7 +287,7 @@ export default class UIManager {
     const chartData = evalLogic.getChartData();
 
     const ageInMonths = this.currentChildState.getAgeInMonths();
-    // WICHTIG: Limitiert das theoretische Lebensalter im Chart strikt auf 14 Phasen!
+    // Deckelt das Alter strikt auf max 14 (wie gewünscht!)
     const bellerPhaseAge = Math.min(14, Evaluation.convertMonthsToPhase(ageInMonths));
 
     // Metadaten anzeigen

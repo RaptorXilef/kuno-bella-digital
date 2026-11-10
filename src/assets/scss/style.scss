@@ -402,13 +402,9 @@ body {
    PRINT STYLES (Native PDF Export Logik)
    ========================================================================== */
 @media print {
-  @page {
-    size: a4 portrait;
-    margin: 1cm; /* Noch schmalere Seitenränder für mehr Platz */
-  }
+  /* HINWEIS: @page size (Hoch/Quer) wird über UIManager dynamisch injiziert */
 
   body {
-    /* Zwingt Chrome/Edge dazu, alle Hintergrundfarben exakt so zu drucken, wie sie auf dem Screen sind */
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background-color: #fff;
@@ -421,12 +417,12 @@ body {
   }
 
   .l-container {
-    max-width: 100% !important; /* Zwingt auf die volle A4 Breite */
+    max-width: 100% !important; /* Volle Breite nutzen */
     padding: 0 !important;
     margin: 0 !important;
   }
 
-  /* Zwingt das Diagramm exakt auf EINE volle A4 Seite */
+  /* --- EXPORT: PROFIL (Diagramm + Tabelle auf Querformat) --- */
   .c-evaluation {
     padding: 0;
     margin: 0;
@@ -435,9 +431,11 @@ body {
 
     &__chart-wrapper {
       width: 100% !important;
-      max-width: 18cm !important; /* Standard A4 Breite abzüglich Margins */
-      height: 24cm !important; /* Nahezu volle A4 Höhe */
-      max-height: 24cm !important;
+      max-width: 100% !important;
+
+      /* 15cm Höhe passt optisch exzellent auf A4 Querformat ohne Schriften zu zerren */
+      height: 15cm !important;
+      max-height: 15cm !important;
       margin: 0 auto;
 
       canvas {
@@ -452,7 +450,8 @@ body {
     box-shadow: none;
 
     &__table {
-      font-size: 0.75rem !important; /* Noch kleiner für Print */
+      font-size: 0.75rem !important;
+
       th,
       td {
         padding: 0.15rem !important;
@@ -460,7 +459,7 @@ body {
     }
   }
 
-  /* --- EXTREME KOMPRIMIERUNG FÜR FRAGENKATALOG PDF --- */
+  /* --- EXPORT: FRAGENKATALOG (Hochformat) --- */
   .c-category {
     padding: 0.5rem !important;
     margin-bottom: 0.5rem !important;
@@ -478,13 +477,16 @@ body {
   .c-phase {
     margin-bottom: 0.5rem !important;
 
-    /* WICHTIG: Erlaubt den Umbruch INNERHALB einer Phase, damit kein Platz verschwendet wird */
+    /* Phase selbst darf in der Mitte zerschnitten werden für max. Papierersparnis */
     break-inside: auto !important;
 
     &__title {
       padding: 0.25rem 0.5rem !important;
       margin-bottom: 0 !important;
       font-size: 1rem !important;
+
+      /* INTELLIGENTER UMBRUCH: Überschrift darf NIE alleine unten auf der Seite stehen! */
+      break-after: avoid !important;
     }
 
     &__questions {
@@ -497,7 +499,7 @@ body {
     padding: 0.25rem 0 !important;
     border-bottom: 1px solid oklch(90% 0 0deg) !important;
 
-    /* Verhindert nur, dass eine einzelne FRAGE zerschnitten wird */
+    /* Eine einzelne Frage (Text + Buttons) darf nie in der Mitte zerteilt werden */
     break-inside: avoid !important;
 
     &__text {
@@ -516,10 +518,10 @@ body {
 
   .c-button {
     padding: 0.25rem 0.4rem !important;
-    font-size: 0.75rem !important; /* Mini-Buttons für Print */
+    font-size: 0.75rem !important; /* Mini-Buttons sparen viel Platz auf A4 */
   }
 
-  /* --- LOGIK FÜR DIE ZWEI EXPORT-BUTTONS --- */
+  /* --- SICHTBARKEITS-LOGIK FÜR DIE EXPORT-MODI --- */
 
   /* Modus 1: Nur Profil (Diagramm + Übersicht) */
   body.print-eval {
