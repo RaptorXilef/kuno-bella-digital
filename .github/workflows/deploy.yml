@@ -47,7 +47,7 @@ jobs:
         run: npm run build
 
       - name: 🌐 Dateien per FTP hochladen
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
