@@ -252,8 +252,7 @@ export default class UIManager {
   generateEvaluation() {
     if (!this.currentChildState) return;
 
-    // 1. Blendet den "Auswerten" Button aus und zeigt die PDF Buttons
-    this.elements.evaluateBtn.classList.add('is-hidden');
+    // Zeigt die PDF Buttons, lässt den Evaluate Button aber da (zum erneuten Aktualisieren!)
     this.elements.exportPdfEvalBtn.classList.remove('is-hidden');
     this.elements.exportPdfQuestBtn.classList.remove('is-hidden');
 
@@ -265,7 +264,8 @@ export default class UIManager {
     const chartData = evalLogic.getChartData();
 
     const ageInMonths = this.currentChildState.getAgeInMonths();
-    const bellerPhaseAge = Evaluation.convertMonthsToPhase(ageInMonths);
+    // WICHTIG: Limitiert das theoretische Lebensalter im Chart strikt auf 14 Phasen!
+    const bellerPhaseAge = Math.min(14, Evaluation.convertMonthsToPhase(ageInMonths));
 
     // Metadaten anzeigen
     this.elements.evalMeta.innerHTML = `
@@ -284,6 +284,7 @@ export default class UIManager {
 
     const len = chartData.labels.length;
     const lineDurchschnitt = Array(len).fill(bellerPhaseAge);
+    // Auch Basis und Decke strikt zwischen 0 und 14 limitieren
     const lineBasis = Array(len).fill(Math.max(0, bellerPhaseAge - 1.5));
     const lineDecke = Array(len).fill(Math.min(14, bellerPhaseAge + 1.5));
 
@@ -315,7 +316,7 @@ export default class UIManager {
           },
           {
             type: 'line',
-            label: 'Durchschnitt',
+            label: 'Lebensalter (Phase)',
             data: lineDurchschnitt,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderDash: [5, 5],

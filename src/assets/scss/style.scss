@@ -404,7 +404,7 @@ body {
 @media print {
   @page {
     size: a4 portrait;
-    margin: 1.5cm;
+    margin: 1cm; /* Noch schmalere Seitenränder für mehr Platz */
   }
 
   body {
@@ -421,6 +421,7 @@ body {
   }
 
   .l-container {
+    max-width: 100% !important; /* Zwingt auf die volle A4 Breite */
     padding: 0 !important;
     margin: 0 !important;
   }
@@ -430,28 +431,92 @@ body {
     padding: 0;
     margin: 0;
     box-shadow: none; /* Nach dem Diagramm zwingend eine neue Seite starten */
+    break-after: page;
 
     &__chart-wrapper {
-      height: 24cm !important; /* Exakte Höhe für A4-Seite */
+      width: 100% !important;
+      max-width: 18cm !important; /* Standard A4 Breite abzüglich Margins */
+      height: 24cm !important; /* Nahezu volle A4 Höhe */
       max-height: 24cm !important;
+      margin: 0 auto;
+
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
     }
   }
 
   .c-overview {
     padding: 0;
     box-shadow: none;
+
+    &__table {
+      font-size: 0.75rem !important; /* Noch kleiner für Print */
+      th,
+      td {
+        padding: 0.15rem !important;
+      }
+    }
   }
 
-  /* Kategorien und Phasen für PDF optimieren */
+  /* --- EXTREME KOMPRIMIERUNG FÜR FRAGENKATALOG PDF --- */
   .c-category {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
     border: 1px solid var(--color-border);
     box-shadow: none; /* Phasen-Block startet immer frisch */
     break-before: page;
+
+    &__title {
+      padding-bottom: 0.25rem !important;
+      margin-bottom: 0.5rem !important;
+      font-size: 1.2rem !important;
+    }
   }
 
   .c-phase {
-    /* Keine halben Phasen auf Seiten! */
-    break-inside: avoid;
+    margin-bottom: 0.5rem !important;
+
+    /* WICHTIG: Erlaubt den Umbruch INNERHALB einer Phase, damit kein Platz verschwendet wird */
+    break-inside: auto !important;
+
+    &__title {
+      padding: 0.25rem 0.5rem !important;
+      margin-bottom: 0 !important;
+      font-size: 1rem !important;
+    }
+
+    &__questions {
+      padding: 0 0.5rem !important;
+    }
+  }
+
+  .c-question {
+    gap: 0.5rem !important;
+    padding: 0.25rem 0 !important;
+    border-bottom: 1px solid oklch(90% 0 0deg) !important;
+
+    /* Verhindert nur, dass eine einzelne FRAGE zerschnitten wird */
+    break-inside: avoid !important;
+
+    &__text {
+      font-size: 0.85rem !important;
+    }
+
+    &__example {
+      margin-top: 0 !important;
+      font-size: 0.75rem !important;
+    }
+
+    &__options {
+      gap: 0.25rem !important;
+    }
+  }
+
+  .c-button {
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.75rem !important; /* Mini-Buttons für Print */
   }
 
   /* --- LOGIK FÜR DIE ZWEI EXPORT-BUTTONS --- */
@@ -470,9 +535,9 @@ body {
       display: none !important;
     }
 
-    /* Das Assessment Section als Erstes: also Seitenumbruch bei erster Kategorie entfernen */
+    /* Die erste Kategorie braucht hier keinen Seitenumbruch, da davor nichts mehr kommt */
     #assessment-section .c-category:first-child {
-      break-before: auto;
+      break-before: auto !important;
     }
   }
 }
