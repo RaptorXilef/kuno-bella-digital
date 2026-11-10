@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/RaptorXilef/kuno-bella-digital/compare/v0.2.0...v0.2.1) (2026-11-10)
+
+### 🐛 Bug Fixes
+
+* pwa icons ([3a423fb](https://github.com/RaptorXilef/kuno-bella-digital/commit/3a423fb66fb67413769293ae7f1649b0a6cffe8e))
+
 ## [0.2.0](https://github.com/RaptorXilef/kuno-bella-digital/compare/v0.1.0...v0.2.0) (2026-11-10)
 
 ### 🚀 Features
