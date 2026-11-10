@@ -12,7 +12,6 @@ export default class FormBuilder {
     this.container = document.getElementById(containerId);
     this.childState = childState;
     this.questionsData = questionsData;
-    this.currentOpenAccordion = null; // Speichert das offene Element
   }
 
   /**
@@ -31,50 +30,21 @@ export default class FormBuilder {
    * Baut einen Bereich für eine Kategorie (z.B. Körperpflege).
    */
   createCategorySection(categoryName, phases) {
+    // Flaches, stabiles Layout (kein Akkordeon)
     const section = document.createElement('section');
-    section.className = 'c-accordion c-category';
-    // WICHTIG für das SCSS: Wir übergeben den Namen als Attribut für die Bereichsfarbe
+    section.className = 'c-category';
+    // Attribut für das farbige Styling der jeweiligen Kategorie
     section.setAttribute('data-category', categoryName);
-
-    // Kopfbereich (zum Klicken)
-    const header = document.createElement('div');
-    header.className = 'c-accordion__header';
 
     const title = document.createElement('h2');
     title.className = 'c-category__title';
     title.textContent = categoryName;
-    header.appendChild(title);
-
-    // Content-Bereich (wird ein/ausgeklappt)
-    const content = document.createElement('div');
-    content.className = 'c-accordion__content is-collapsed';
+    section.appendChild(title);
 
     for (const [phaseName, questions] of Object.entries(phases)) {
       const phaseSection = this.createPhaseSection(categoryName, phaseName, questions);
-      content.appendChild(phaseSection);
+      section.appendChild(phaseSection);
     }
-
-    // AKKORDEON LOGIK (Gefixed)
-    header.addEventListener('click', () => {
-      const isCurrentlyClosed = content.classList.contains('is-collapsed');
-
-      // Erstmal alle schließen
-      const allContents = this.container.querySelectorAll('.c-accordion__content');
-      for (const c of allContents) {
-        c.classList.add('is-collapsed');
-      }
-
-      // Wenn es vorher zu war, jetzt öffnen!
-      if (isCurrentlyClosed) {
-        content.classList.remove('is-collapsed');
-        this.currentOpenAccordion = content;
-      } else {
-        this.currentOpenAccordion = null;
-      }
-    });
-
-    section.appendChild(header);
-    section.appendChild(content);
 
     return section;
   }
@@ -138,11 +108,12 @@ export default class FormBuilder {
 
     options.forEach((opt) => {
       const btn = document.createElement('button');
-      btn.type = 'button'; // Fixt den Biome Fehler!
+      btn.type = 'button'; // Fixt den Biome Fehler
 
       const isSelectedClass = currentAnswer === opt.value ? 'is-selected' : '';
       btn.className = `c-button c-button--option ${isSelectedClass}`.trim();
       btn.textContent = opt.label;
+
       // WICHTIG für SCSS: Data-Value steuert die Farbe (rot, grün, blau, grau)
       btn.dataset.value = opt.value;
 
@@ -155,6 +126,7 @@ export default class FormBuilder {
         }
         // 2. Bei sich selbst setzen
         btn.classList.add('is-selected');
+
         // Das speichert den Wert und löst automatisch das LocalStorage-Auto-Save aus!
         this.childState.setAnswer(categoryName, phaseName, question.id, opt.value);
       });
