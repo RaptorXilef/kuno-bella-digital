@@ -1,0 +1,2034 @@
+{
+  "Körperpflege": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Umgebungsbewusstsein": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Sozial-Emotionale Entwicklung": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Spieltätigkeit": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Sprache": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Kognition": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Grobmotorik": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  },
+  "Feinmotorik": {
+    "PHASE 1": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 2": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 3": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 4": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 5": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 6": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 7": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 8": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 9": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 10": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 11": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 12": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 13": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ],
+    "PHASE 14": [
+      {
+        "id": 1,
+        "text": "Frage 1\nBsp.: Beispieltext für Frage 1"
+      },
+      {
+        "id": 2,
+        "text": "Frage 2\nBsp.: Beispieltext für Frage 2"
+      },
+      {
+        "id": 3,
+        "text": "Frage 3"
+      },
+      {
+        "id": 4,
+        "text": "Frage 4"
+      }
+    ]
+  }
+}
