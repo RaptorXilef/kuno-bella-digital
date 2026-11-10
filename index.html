@@ -14,6 +14,7 @@
                 Aktuelles Kind: <strong id="current-child-name">Keines ausgewählt</strong>
             </div>
             <div class="l-header__actions">
+                <button type="button" id="edit-meta-btn" class="c-button c-button--secondary is-hidden">Bearbeiten</button>
                 <button type="button" id="new-assessment" class="c-button c-button--secondary">Neu starten</button>
                 <label class="c-button c-button--secondary">
                     Laden <input type="file" id="upload-json" accept=".kuno" hidden>
@@ -48,10 +49,7 @@
 
         <!-- Diagramm -->
         <section id="evaluation-section" class="c-evaluation is-hidden">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
-                <button type="button" id="edit-meta-btn" class="c-button c-button--secondary" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Metadaten bearbeiten</button>
-            </div>
+            <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
             <div class="c-evaluation__meta" id="eval-meta" style="margin-bottom: 1rem;"></div>
             <div class="c-evaluation__chart-wrapper">
                 <canvas id="kuno-chart"></canvas>

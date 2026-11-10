@@ -104,31 +104,26 @@ export default class Evaluation {
   }
 
   /**
-   * Konvertiert Kalendermonate in den Beller-Phasen-Wert,
-   * damit die Durchschnittslinie exakt ins Skalen-Fenster (1-14) passt.
+   * Konvertiert Kalendermonate exakt in den Beller-Phasen-Wert.
+   * Nach Handbuch:
+   * Phase 1-4 = Jeweils 3 Monate (0 bis 12)
+   * Phase 5-14 = Jeweils 6 Monate (13 bis 72)
    */
   static convertMonthsToPhase(months) {
-    if (months <= 1) return 1;
-    if (months <= 2) return 2;
-    if (months <= 3) return 3;
-    if (months <= 4) return 4;
-    if (months <= 5) return 5;
-    // Approximation der Phasen 6-12 (immer größere Sprünge)
-    if (months <= 7) return 6 + (months - 5) / 2;
-    if (months <= 9) return 7 + (months - 7) / 2;
-    if (months <= 11) return 8 + (months - 9) / 2;
-    if (months <= 15) return 9 + (months - 11) / 4;
-    if (months <= 21) return 10 + (months - 15) / 6;
-    if (months <= 28) return 11 + (months - 21) / 7;
-    if (months <= 36) return 12 + (months - 28) / 8;
-    // Phase 13 = 37 bis 48 Monate
-    if (months <= 48) return 13 + (months - 36) / 12;
-    // Phase 14 = ab 49 Monaten (bis 72). Wenn Kind 5 Jahre (60 Monate) ist,
-    // wird es hier korrekt in Phase 14 einsortiert!
-    if (months > 48) {
-      const phase = 14 + (months - 48) / 24;
-      return phase > 14.9 ? 14.9 : phase; // Maximal Phase 14.9 zeichnen, damit die Linie nicht aus dem Canvas springt
+    if (months <= 0) return 0;
+
+    // Erstes Lebensjahr: Jede Phase ist 3 Monate lang
+    if (months <= 12) {
+      return months / 3;
     }
+
+    // Ab dem 13. Monat: Jede Phase ist 6 Monate lang
+    // Da wir bei 12 Monaten in Phase 4.0 sind, rechnen wir von dort weiter.
+    if (months <= 72) {
+      return 4 + (months - 12) / 6;
+    }
+
+    // Alles über 72 Monaten wird bei 14 gedeckelt
     return 14;
   }
 }

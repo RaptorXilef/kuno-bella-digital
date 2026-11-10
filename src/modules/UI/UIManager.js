@@ -123,7 +123,7 @@ export default class UIManager {
 
       this.elements.setupSection.classList.remove('is-hidden');
       // Wir scrollen smooth nach oben zum Bearbeiten
-      this.elements.setupSection.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Laufende Arbeit verwerfen und Neu Starten
@@ -212,6 +212,7 @@ export default class UIManager {
     this.elements.assessmentSection.classList.remove('is-hidden');
 
     // Aktions-Buttons einblenden
+    this.elements.editMetaBtn.classList.remove('is-hidden');
     this.elements.saveJsonBtn.classList.remove('is-hidden');
     this.elements.evaluateBtn.classList.remove('is-hidden');
     this.elements.endSessionBtn.classList.remove('is-hidden');
@@ -226,12 +227,14 @@ export default class UIManager {
     // UI zurücksetzen
     this.elements.currentChildName.textContent = 'Keines ausgewählt';
     this.elements.setupTitle.textContent = 'Kind anlegen';
+
     this.elements.setupSection.classList.remove('is-hidden');
     this.elements.assessmentSection.classList.add('is-hidden');
     this.elements.evaluationSection.classList.add('is-hidden');
     this.elements.overviewSection.classList.add('is-hidden');
 
     // Aktions-Buttons ausblenden
+    this.elements.editMetaBtn.classList.add('is-hidden');
     this.elements.saveJsonBtn.classList.add('is-hidden');
     this.elements.evaluateBtn.classList.add('is-hidden');
     this.elements.exportPdfEvalBtn.classList.add('is-hidden');
@@ -334,8 +337,9 @@ export default class UIManager {
     }
 
     const labels = Object.keys(metrics);
-    // Wir ziehen die individuellen Werte aus der neuen Auswertungs-Logik
-    const dataErreicht = labels.map((l) => metrics[l].score);
+
+    // Die 4 separaten Metriken für die 4 Linien!
+    const dataDurchschnitt = labels.map((l) => metrics[l].score);
     const dataBasis = labels.map((l) => metrics[l].basis);
     const dataDecke = labels.map((l) => metrics[l].decke);
 
@@ -348,35 +352,22 @@ export default class UIManager {
         labels: labels,
         datasets: [
           {
-            label: 'Erreicht',
-            data: dataErreicht,
-            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-            order: 4,
+            label: 'Erreicht (Balken)',
+            data: dataDurchschnitt,
+            backgroundColor: 'rgba(54, 162, 235, 0.3)',
+            borderColor: 'rgba(54, 162, 235, 0)',
+            borderWidth: 0,
+            order: 5,
             barPercentage: 0.6,
           },
           {
             type: 'line',
-            label: 'Decke',
-            data: dataDecke,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderDash: [2, 2],
-            borderWidth: 2,
-            pointRadius: 4,
-            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-            fill: false,
-            order: 1,
-          },
-          {
-            // DURCHSCHNITTS-LINIE IST JETZT AKTIV!
-            type: 'line',
-            label: 'Lebensalter (Durchschnitt)',
-            data: lineLebensalter,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderDash: [5, 5],
+            label: 'Durchschnitt',
+            data: dataDurchschnitt,
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 3,
-            pointRadius: 0,
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
             fill: false,
             order: 2,
           },
@@ -392,6 +383,29 @@ export default class UIManager {
             fill: false,
             order: 3,
           },
+          {
+            type: 'line',
+            label: 'Decke',
+            data: dataDecke,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderDash: [2, 2],
+            borderWidth: 2,
+            pointRadius: 4,
+            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            fill: false,
+            order: 1,
+          },
+          {
+            type: 'line',
+            label: 'Lebensalter',
+            data: lineLebensalter,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderDash: [5, 5],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            order: 4,
+          },
         ],
       },
       options: {
@@ -400,7 +414,7 @@ export default class UIManager {
         scales: {
           y: {
             beginAtZero: true,
-            max: 15, // Etwas Puffer über 14 für den .5er Cutoff
+            max: 14,
             title: { display: true, text: 'Phasen', font: { size: 14, weight: 'bold' } },
             ticks: {
               stepSize: 0.1, // 0.1er Schritte erzwingen
@@ -416,9 +430,8 @@ export default class UIManager {
               color: (context) => {
                 const rounded = Math.round(context.tick.value * 10) / 10;
                 if (rounded === 0) return 'rgba(0, 0, 0, 0.5)'; // Dicke 0 Linie
-                if (Number.isInteger(rounded)) {
-                  return 'rgba(0, 0, 0, 0.4)'; // Dickere Linie bei 1, 2, 3...
-                }
+                if (Number.isInteger(rounded)) return 'rgba(0, 0, 0, 0.4)'; // Dickere Linie bei 1, 2, 3...
+
                 // Super feine Hilfslinien bei 0.1, 0.2, 0.3...
                 return 'rgba(0, 0, 0, 0.05)';
               },
