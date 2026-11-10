@@ -37,7 +37,8 @@
     "chk": "npm run chk:biome && npm run chk:css && npm run chk:html && npm run test",
     "fix": "npm run fix:biome && npm run fix:css",
     "// --- PHASE 5: RELEASE & CI ---": "",
-    "release": "release-it"
+    "release": "release-it",
+    "release:init": "release-it --first-release"
   },
   "dependencies": {
     "chart.js": "^4.4.0",
