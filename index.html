@@ -14,13 +14,13 @@
                 Aktuelles Kind: <strong id="current-child-name">Keines ausgewählt</strong>
             </div>
             <div class="l-header__actions">
-                <button id="new-assessment" class="c-button c-button--secondary">Neu starten</button>
+                <button type="button" id="new-assessment" class="c-button c-button--secondary">Neu starten</button>
                 <label class="c-button c-button--secondary">
                     Laden <input type="file" id="upload-json" accept=".kuno" hidden>
                 </label>
-                <button id="save-json" class="c-button c-button--primary is-hidden">Download</button>
-                <button id="export-pdf" class="c-button c-button--success is-hidden">Auswerten & PDF</button>
-                <button id="end-session" class="c-button c-button--danger is-hidden">Sitzung beenden</button>
+                <button type="button" id="save-json" class="c-button c-button--primary is-hidden">Download</button>
+                <button type="button" id="export-pdf" class="c-button c-button--success is-hidden">Auswerten & PDF</button>
+                <button type="button" id="end-session" class="c-button c-button--danger is-hidden">Sitzung beenden</button>
             </div>
         </div>
     </header>
@@ -42,14 +42,15 @@
                 <label class="c-form-group__label" for="child-date">Datum der Beobachtung</label>
                 <input class="c-form-group__input" type="date" id="child-date">
             </div>
-            <button id="start-assessment" class="c-button c-button--primary">Beobachtung starten</button>
+            <button type="button" id="start-assessment" class="c-button c-button--primary">Beobachtung starten</button>
         </section>
 
         <!-- Diagramm Sektion (wird erst bei Klick auf Auswerten sichtbar) -->
         <section id="evaluation-section" class="c-evaluation is-hidden u-page-break-before">
             <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
             <div class="c-evaluation__meta" id="eval-meta"></div>
-            <div class="c-evaluation__chart-wrapper">
+            <!-- WICHTIG: Festgelegte Höhe für Chart.js -->
+            <div class="c-evaluation__chart-wrapper" style="position: relative; height: 50vh; min-height: 400px; width: 100%;">
                 <canvas id="kuno-chart"></canvas>
             </div>
         </section>

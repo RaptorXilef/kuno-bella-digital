@@ -259,14 +259,10 @@ export default class UIManager {
             grid: {
               // Zeichnet die Linien im Hintergrund (0.1 bis 0.9)
               color: (context) => {
-                if (context.tick.value === 0) return 'rgba(0, 0, 0, 0.5)'; // Nulllinie dunkel
-                if (Number.isInteger(context.tick.value)) {
-                  return 'rgba(0, 0, 0, 0.3)'; // Volle Phasen (1, 2, 3) normal
-                }
+                if (context.tick.value === 0) return 'rgba(0, 0, 0, 0.5)';
+                if (Number.isInteger(context.tick.value)) return 'rgba(0, 0, 0, 0.3)';
                 // Die .5er Mitte (Halbe Phase) etwas dunkler hervorheben
-                if ((context.tick.value * 10) % 10 === 5) {
-                  return 'rgba(0, 0, 0, 0.15)';
-                }
+                if ((context.tick.value * 10) % 10 === 5) return 'rgba(0, 0, 0, 0.15)';
                 // Die 9 kleinen Zwischenstriche (0.1, 0.2...) sehr dezent
                 return 'rgba(0, 0, 0, 0.05)';
               },
@@ -276,15 +272,18 @@ export default class UIManager {
       },
     });
 
-    // WICHTIGER WORKAROUND FÜR HTML2PDF.js (OKLCH Bugfix)
-    // Wandelt temporär alle CSS-Variablen von oklch zu simplen RGB Werten um
-    const originalBg = document.documentElement.style.getPropertyValue('--color-bg');
-    const originalSurface = document.documentElement.style.getPropertyValue('--color-surface');
-    const originalText = document.documentElement.style.getPropertyValue('--color-text-main');
-
-    document.documentElement.style.setProperty('--color-bg', '#ffffff');
-    document.documentElement.style.setProperty('--color-surface', '#ffffff');
-    document.documentElement.style.setProperty('--color-text-main', '#333333');
+    // HTML2PDF WORKAROUND:
+    // Setze für den Druck die Root-Styles auf Standard RGB-Werte (html2pdf crasht bei CSS-Variablen + oklch)
+    const root = document.documentElement;
+    root.style.cssText = `
+            --color-bg: #f9f9fa;
+            --color-surface: #ffffff;
+            --color-text-main: #333333;
+            --color-primary: #3b82f6;
+            --color-success: #22c55e;
+            --color-danger: #ef4444;
+            --color-border: #e5e7eb;
+        `;
 
     // Kurzer Timeout für das Diagramm-Rendering, dann drucken
     setTimeout(() => {
@@ -294,7 +293,7 @@ export default class UIManager {
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'css', avoid: '.c-phase' }, // Versucht, Phasen auf Seiten nicht zu durchschneiden
+        pagebreak: { mode: 'css', avoid: ['.c-phase', '.c-category'] }, // Versucht, Phasen auf Seiten nicht zu durchschneiden
       };
 
       // Nimmt NUR den main#pdf-content Bereich
@@ -303,10 +302,8 @@ export default class UIManager {
         .from(this.elements.pdfContentArea)
         .save()
         .then(() => {
-          // Restore variables
-          document.documentElement.style.setProperty('--color-bg', originalBg);
-          document.documentElement.style.setProperty('--color-surface', originalSurface);
-          document.documentElement.style.setProperty('--color-text-main', originalText);
+          // PDF fertig -> OKLCH Farben wiederherstellen
+          root.style.cssText = '';
         });
     }, 1000);
   }

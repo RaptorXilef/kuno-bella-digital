@@ -54,24 +54,22 @@ export default class FormBuilder {
       content.appendChild(phaseSection);
     }
 
-    // Klick-Logik für das Akkordeon
+    // AKKORDEON LOGIK (Gefixed)
     header.addEventListener('click', () => {
-      const isClosing = !content.classList.contains('is-collapsed');
+      const isCurrentlyClosed = content.classList.contains('is-collapsed');
 
-      // Erstmal alle anderen schließen
-      if (this.currentOpenAccordion && this.currentOpenAccordion !== content) {
-        this.currentOpenAccordion.classList.add('is-collapsed');
-        this.currentOpenAccordion.parentElement.classList.remove('is-open');
+      // Erstmal alle schließen
+      const allContents = this.container.querySelectorAll('.c-accordion__content');
+      for (const c of allContents) {
+        c.classList.add('is-collapsed');
       }
 
-      if (isClosing) {
-        content.classList.add('is-collapsed');
-        section.classList.remove('is-open');
-        this.currentOpenAccordion = null;
-      } else {
+      // Wenn es vorher zu war, jetzt öffnen!
+      if (isCurrentlyClosed) {
         content.classList.remove('is-collapsed');
-        section.classList.add('is-open');
         this.currentOpenAccordion = content;
+      } else {
+        this.currentOpenAccordion = null;
       }
     });
 
@@ -140,6 +138,8 @@ export default class FormBuilder {
 
     options.forEach((opt) => {
       const btn = document.createElement('button');
+      btn.type = 'button'; // Fixt den Biome Fehler!
+
       const isSelectedClass = currentAnswer === opt.value ? 'is-selected' : '';
       btn.className = `c-button c-button--option ${isSelectedClass}`.trim();
       btn.textContent = opt.label;
