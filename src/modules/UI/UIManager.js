@@ -452,5 +452,8 @@ export default class UIManager {
         },
       },
     });
+
+    // Nach der Auswertung sanft nach oben zum Diagramm scrollen
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
