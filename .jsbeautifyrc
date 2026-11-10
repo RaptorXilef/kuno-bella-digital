@@ -1,15 +1,15 @@
 {
-    "html": {
-        "indent_size": 2,
-        "indent_char": " ",
-        "indent_inner_html": false,
-        "indent_scripts": "keep",
-        "wrap_line_length": 120,
-        "wrap_attributes": "force-expand-multiline",
-        "wrap_attributes_indent_size": 2,
-        "unformatted": ["pre", "code", "textarea"],
-        "end_with_newline": true,
-        "extra_liners": ["head", "body", "/html"],
-        "templating": ["php"]
-    }
+  "html": {
+    "indent_size": 2,
+    "indent_char": " ",
+    "indent_inner_html": false,
+    "indent_scripts": "keep",
+    "wrap_line_length": 120,
+    "wrap_attributes": "force-expand-multiline",
+    "wrap_attributes_indent_size": 2,
+    "unformatted": ["pre", "code", "textarea"],
+    "end_with_newline": true,
+    "extra_liners": ["head", "body", "/html"],
+    "templating": ["php"]
+  }
 }

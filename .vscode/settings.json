@@ -1,149 +1,149 @@
 {
-    // =========================================================================
-    // EDITOR & FORMATTING CORE
-    // =========================================================================
+  // =========================================================================
+  // EDITOR & FORMATTING CORE
+  // =========================================================================
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.rulers": [120],
+  "editor.bracketPairColorization.enabled": true,
+  "editor.linkedEditing": true,
+  "files.eol": "\n", // Unix-Zeilenenden für Git-Konsistenz
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000, // Wenn CPU Last zu hoch auf 3000 oder 5000 erhöhen
+
+  "gremlins.showInProblemPane": true,
+
+  // =========================================================================
+  // SPRACH-SPEZIFISCHE EINSTELLUNGEN
+  // =========================================================================
+
+  // Verhindert, dass VS Code Biome nach Teilbereichs-Formatierung fragt
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": false,
+
+  // --- PHP ---
+  "[php]": {
+    "editor.defaultFormatter": "muuvmuuv.vscode-just-php-cs-fixer",
+    "editor.wordWrap": "off",
+    "editor.renderWhitespace": "boundary"
+  },
+  "[phtml]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "editor.wordWrap": "off",
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": false
+  },
+  "intelephense.format.enable": false, // CLI-Tools (PHP-CS-Fixer) haben Vorrang!
+  "php.suggest.basic": false,
+  "php-docblocker.gap": true,
+
+  // --- BIOME (JS, JSON) ---
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": false,
+    // WICHTIG: Mode auf "file" setzen, nicht "modifications"
+    "editor.formatOnSaveMode": "file",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never",
+      "source.organizeImports.biome": "explicit"
+    }
+  },
+  "[json]": { "editor.defaultFormatter": "biomejs.biome" },
+  "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
+
+  // --- CSS / SCSS ---
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
-        "source.organizeImports": "explicit"
-    },
+      "source.fixAll": "never",
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  "stylelint.validate": ["css", "scss"],
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+
+  // --- HTML ---
+  "[html]": {
     "editor.defaultFormatter": "biomejs.biome",
-    "editor.tabSize": 4,
-    "editor.insertSpaces": true,
-    "editor.rulers": [120],
-    "editor.bracketPairColorization.enabled": true,
-    "editor.linkedEditing": true,
-    "files.eol": "\n", // Unix-Zeilenenden für Git-Konsistenz
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000, // Wenn CPU Last zu hoch auf 3000 oder 5000 erhöhen
+    "editor.codeActionsOnSave": { "source.fixAll.markuplint": "explicit" }
+  },
 
-    "gremlins.showInProblemPane": true,
+  // --- MARKDOWN ---
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
+    "editor.wordWrap": "on"
+  },
+  "[confetti-apache]": {
+    "editor.defaultFormatter": "rhevorn.confetti"
+  },
+  "rewrap.wrappingColumn": 120,
+  "rewrap.wholeComment": true,
 
-    // =========================================================================
-    // SPRACH-SPEZIFISCHE EINSTELLUNGEN
-    // =========================================================================
+  // =========================================================================
+  // EXPLORER, SEARCH & WATCHER
+  // =========================================================================
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": false,
+    "**/vendor": false,
+    "**/.build": true,
+    "**/.cache": true,
+    "**/.debug": true,
+    "**/*.map": true,
+    ".phpcs.cache": true,
+    ".phpstan.cache": true,
+    ".phpunit.cache": true,
+    "public/dist": false
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/vendor": true,
+    "**/.build": true,
+    "**/.cache": true,
+    "public/dist": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/vendor/**": true,
+    "**/.debug/**": true,
+    "**/public/dist/**": true
+  },
 
-    // Verhindert, dass VS Code Biome nach Teilbereichs-Formatierung fragt
-    "editor.formatOnType": false,
-    "editor.formatOnPaste": false,
+  "intelephense.diagnostics.undefinedTypes": false, // Deaktiviert, da wir 90% JS machen
+  "intelephense.diagnostics.deprecated": true,
+  "intelephense.diagnostics.run": "onType",
+  "problems.showCurrentInStatus": true,
 
-    // --- PHP ---
-    "[php]": {
-        "editor.defaultFormatter": "muuvmuuv.vscode-just-php-cs-fixer",
-        "editor.wordWrap": "off",
-        "editor.renderWhitespace": "boundary"
-    },
-    "[phtml]": {
-        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
-        "editor.wordWrap": "off",
-        "editor.renderWhitespace": "boundary",
-        "editor.formatOnSave": false
-    },
-    "intelephense.format.enable": false, // CLI-Tools (PHP-CS-Fixer) haben Vorrang!
-    "php.suggest.basic": false,
-    "php-docblocker.gap": true,
+  // =========================================================================
+  // TOOLS & WORKFLOW
+  // =========================================================================
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.codeLens": true,
+  "diffEditor.maxComputationTime": 30000,
 
-    // --- BIOME (JS, JSON) ---
-    "[javascript]": {
-        "editor.defaultFormatter": "biomejs.biome",
-        "editor.formatOnSave": false,
-        // WICHTIG: Mode auf "file" setzen, nicht "modifications"
-        "editor.formatOnSaveMode": "file",
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "never",
-            "source.organizeImports.biome": "explicit"
-        }
-    },
-    "[json]": { "editor.defaultFormatter": "biomejs.biome" },
-    "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
+  "cSpell.language": "en,de",
+  "cSpell.diagnosticLevel": "Hint",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "errorLens.onInlayHints": true,
 
-    // --- CSS / SCSS ---
-    "[scss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": false,
-        "editor.codeActionsOnSave": {
-            "source.fixAll": "never",
-            "source.fixAll.stylelint": "explicit"
-        }
-    },
-    "stylelint.validate": ["css", "scss"],
-    "css.validate": false,
-    "scss.validate": false,
-    "less.validate": false,
+  // --- THEME ---
+  "files.insertFinalNewline": true,
+  "workbench.iconTheme": "vira-icons-carbon",
+  "workbench.productIconTheme": "viraUIIcons",
+  "workbench.colorTheme": "Vira Carbon High Contrast",
+  "viraTheme.accent": "White",
 
-    // --- HTML ---
-    "[html]": {
-        "editor.defaultFormatter": "biomejs.biome",
-        "editor.codeActionsOnSave": { "source.fixAll.markuplint": "explicit" }
-    },
-
-    // --- MARKDOWN ---
-    "[markdown]": {
-        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
-        "editor.wordWrap": "on"
-    },
-    "[confetti-apache]": {
-        "editor.defaultFormatter": "rhevorn.confetti"
-    },
-    "rewrap.wrappingColumn": 120,
-    "rewrap.wholeComment": true,
-
-    // =========================================================================
-    // EXPLORER, SEARCH & WATCHER
-    // =========================================================================
-    "files.exclude": {
-        "**/.git": true,
-        "**/.DS_Store": true,
-        "**/node_modules": false,
-        "**/vendor": false,
-        "**/.build": true,
-        "**/.cache": true,
-        "**/.debug": true,
-        "**/*.map": true,
-        ".phpcs.cache": true,
-        ".phpstan.cache": true,
-        ".phpunit.cache": true,
-        "public/dist": false
-    },
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/vendor": true,
-        "**/.build": true,
-        "**/.cache": true,
-        "public/dist": true
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/node_modules/**": true,
-        "**/vendor/**": true,
-        "**/.debug/**": true,
-        "**/public/dist/**": true
-    },
-
-    "intelephense.diagnostics.undefinedTypes": false, // Deaktiviert, da wir 90% JS machen
-    "intelephense.diagnostics.deprecated": true,
-    "intelephense.diagnostics.run": "onType",
-    "problems.showCurrentInStatus": true,
-
-    // =========================================================================
-    // TOOLS & WORKFLOW
-    // =========================================================================
-    "diffEditor.ignoreTrimWhitespace": false,
-    "diffEditor.experimental.showMoves": true,
-    "diffEditor.codeLens": true,
-    "diffEditor.maxComputationTime": 30000,
-
-    "cSpell.language": "en,de",
-    "cSpell.diagnosticLevel": "Hint",
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
-    "errorLens.onInlayHints": true,
-
-    // --- THEME ---
-    "files.insertFinalNewline": true,
-    "workbench.iconTheme": "vira-icons-carbon",
-    "workbench.productIconTheme": "viraUIIcons",
-    "workbench.colorTheme": "Vira Carbon High Contrast",
-    "viraTheme.accent": "White",
-
-    "php-cs-fixer.toolPath": "${workspaceFolder}/vendor/bin/php-cs-fixer.bat"
+  "php-cs-fixer.toolPath": "${workspaceFolder}/vendor/bin/php-cs-fixer.bat"
 }
