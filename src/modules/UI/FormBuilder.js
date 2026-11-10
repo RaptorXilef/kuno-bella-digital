@@ -12,6 +12,7 @@ export default class FormBuilder {
     this.container = document.getElementById(containerId);
     this.childState = childState;
     this.questionsData = questionsData;
+    this.currentOpenAccordion = null; // Speichert das offene Element
   }
 
   /**
@@ -31,19 +32,51 @@ export default class FormBuilder {
    */
   createCategorySection(categoryName, phases) {
     const section = document.createElement('section');
-    section.className = 'c-category';
+    section.className = 'c-accordion c-category';
     // WICHTIG für das SCSS: Wir übergeben den Namen als Attribut für die Bereichsfarbe
     section.setAttribute('data-category', categoryName);
+
+    // Kopfbereich (zum Klicken)
+    const header = document.createElement('div');
+    header.className = 'c-accordion__header';
 
     const title = document.createElement('h2');
     title.className = 'c-category__title';
     title.textContent = categoryName;
-    section.appendChild(title);
+    header.appendChild(title);
+
+    // Content-Bereich (wird ein/ausgeklappt)
+    const content = document.createElement('div');
+    content.className = 'c-accordion__content is-collapsed';
 
     for (const [phaseName, questions] of Object.entries(phases)) {
       const phaseSection = this.createPhaseSection(categoryName, phaseName, questions);
-      section.appendChild(phaseSection);
+      content.appendChild(phaseSection);
     }
+
+    // Klick-Logik für das Akkordeon
+    header.addEventListener('click', () => {
+      const isClosing = !content.classList.contains('is-collapsed');
+
+      // Erstmal alle anderen schließen
+      if (this.currentOpenAccordion && this.currentOpenAccordion !== content) {
+        this.currentOpenAccordion.classList.add('is-collapsed');
+        this.currentOpenAccordion.parentElement.classList.remove('is-open');
+      }
+
+      if (isClosing) {
+        content.classList.add('is-collapsed');
+        section.classList.remove('is-open');
+        this.currentOpenAccordion = null;
+      } else {
+        content.classList.remove('is-collapsed');
+        section.classList.add('is-open');
+        this.currentOpenAccordion = content;
+      }
+    });
+
+    section.appendChild(header);
+    section.appendChild(content);
 
     return section;
   }

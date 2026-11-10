@@ -30,11 +30,13 @@ export default class UIManager {
 
       setupSection: document.getElementById('setup-section'),
       childNameInput: document.getElementById('child-name'),
+      childBirthdateInput: document.getElementById('child-birthdate'),
       childDateInput: document.getElementById('child-date'),
       startAssessmentBtn: document.getElementById('start-assessment'),
 
       assessmentSection: document.getElementById('assessment-section'),
       evaluationSection: document.getElementById('evaluation-section'),
+      evalMeta: document.getElementById('eval-meta'),
       chartCanvas: document.getElementById('kuno-chart'),
 
       pdfContentArea: document.getElementById('pdf-content'),
@@ -62,14 +64,15 @@ export default class UIManager {
     // Neues Kind anlegen (Setup starten)
     this.elements.startAssessmentBtn.addEventListener('click', () => {
       const name = this.elements.childNameInput.value.trim();
+      const birthdate = this.elements.childBirthdateInput.value;
       const date = this.elements.childDateInput.value;
 
-      if (!name || !date) {
-        alert('Bitte Vorname und Datum ausfüllen!');
+      if (!name || !birthdate || !date) {
+        alert('Bitte Vorname und beide Daten ausfüllen!');
         return;
       }
 
-      this.currentChildState = new ChildState(name, date);
+      this.currentChildState = new ChildState(name, birthdate, date);
       this.currentChildState.saveToStorage(); // Initiales Auto-Save
       this.startAssessment();
     });
@@ -77,18 +80,14 @@ export default class UIManager {
     // Laufende Arbeit verwerfen und Neu Starten
     this.elements.newAssessmentBtn.addEventListener('click', () => {
       if (this.currentChildState) {
-        if (
-          !confirm('Achtung: Dein aktueller Verlauf geht verloren! Hast du ihn als JSON heruntergeladen? Fortfahren?')
-        ) {
-          return;
-        }
+        if (!confirm('Achtung: Dein aktueller Verlauf geht verloren! Fortfahren?')) return;
       }
       this.resetToSetup();
     });
 
     // Sitzung beenden (Löscht den Cache und geht zum Setup)
     this.elements.endSessionBtn.addEventListener('click', () => {
-      if (confirm('Möchtest du die Sitzung wirklich beenden? Alle Daten werden vom Gerät gelöscht.')) {
+      if (confirm('Sitzung beenden? Alle Daten werden vom Gerät gelöscht.')) {
         this.resetToSetup();
       }
     });
@@ -116,13 +115,17 @@ export default class UIManager {
     this.elements.saveJsonBtn.addEventListener('click', () => {
       if (!this.currentChildState) return;
 
-      const jsonString = this.currentChildState.exportJSON();
-      const blob = new Blob([jsonString], { type: 'application/json' });
+      const encodedString = this.currentChildState.exportJSON();
+      const blob = new Blob([encodedString], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
+
+      // Format: YYYYMMDD-HHMMSS
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/T/, '-').replace(/:/g, '').split('.')[0];
 
       const a = document.createElement('a');
       a.href = url;
-      a.download = `kuno_beller_${this.currentChildState.name}_${this.currentChildState.date}.json`;
+      a.download = `kuno_beller_${this.currentChildState.name}_${timestamp}.kuno`;
       a.click();
 
       URL.revokeObjectURL(url);
@@ -171,6 +174,7 @@ export default class UIManager {
 
     // Formular-Felder leeren
     this.elements.childNameInput.value = '';
+    this.elements.childBirthdateInput.value = '';
     this.elements.childDateInput.value = '';
     document.getElementById('question-container').innerHTML = '';
 
@@ -186,6 +190,13 @@ export default class UIManager {
     // 1. Auswertung berechnen
     const evalLogic = new Evaluation(this.currentChildState, this.questionsData);
     const chartData = evalLogic.getChartData();
+    const ageInMonths = this.currentChildState.getAgeInMonths();
+
+    // Metadaten anzeigen
+    this.elements.evalMeta.innerHTML = `
+            <strong>Kind:</strong> ${this.currentChildState.name}<br>
+            <strong>Lebensalter:</strong> ${ageInMonths} Monate
+        `;
 
     // 2. Diagramm-Bereich sichtbar machen
     this.elements.evaluationSection.classList.remove('is-hidden');
@@ -195,6 +206,9 @@ export default class UIManager {
       this.chartInstance.destroy();
     }
 
+    // Basis = Durchschnitt - 20%, Decke = Durchschnitt + 20% (als grobe visuelle Hilfslinien)
+    const ageLine = Array(chartData.labels.length).fill(ageInMonths);
+
     // 4. Neues Balkendiagramm zeichnen
     this.chartInstance = new Chart(this.elements.chartCanvas, {
       type: 'bar',
@@ -202,24 +216,44 @@ export default class UIManager {
         labels: chartData.labels,
         datasets: [
           {
-            label: 'Entwicklungsalter (in Phasen/Monaten)',
+            label: 'Entwicklungsalter (Phasen/Monate)',
             data: chartData.dataset,
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
+            order: 2,
+          },
+          {
+            type: 'line',
+            label: 'Lebensalter',
+            data: ageLine,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderDash: [5, 5],
+            fill: false,
+            order: 1,
           },
         ],
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
             max: 14, // Da wir 14 Phasen haben
+            title: { display: true, text: 'Phasen (ca. Monate)' },
           },
         },
       },
     });
+
+    // WICHTIGER WORKAROUND FÜR HTML2PDF.js
+    // Wandelt temporär alle CSS-Variablen von oklch zu simplen RGB Werten um
+    const originalBg = document.documentElement.style.getPropertyValue('--color-bg');
+    const originalSurface = document.documentElement.style.getPropertyValue('--color-surface');
+
+    document.documentElement.style.setProperty('--color-bg', '#ffffff');
+    document.documentElement.style.setProperty('--color-surface', '#ffffff');
 
     // PDF Generierung (Timeout für die Canvas-Animation)
     setTimeout(() => {
@@ -227,12 +261,20 @@ export default class UIManager {
         margin: 10,
         filename: `kuno_beller_${this.currentChildState.name}_${this.currentChildState.date}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 }, // Hohe Auflösung
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       };
 
       // Nimmt NUR den main#pdf-content Bereich
-      html2pdf().set(opt).from(this.elements.pdfContentArea).save();
+      html2pdf()
+        .set(opt)
+        .from(this.elements.pdfContentArea)
+        .save()
+        .then(() => {
+          // Restore variables
+          document.documentElement.style.setProperty('--color-bg', originalBg);
+          document.documentElement.style.setProperty('--color-surface', originalSurface);
+        });
     }, 800);
   }
 }
