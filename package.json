@@ -9,6 +9,12 @@
     "node": ">=26.4.0",
     "npm": ">=11.11.0"
   },
+  "allowScripts": {
+    "sharp": true,
+    "chromedriver": true,
+    "@parcel/watcher": true,
+    "core-js": true
+  },
   "scripts": {
     "// --- PHASE 1: DEVELOPMENT (VITE) ---": "",
     "dev": "vite",
@@ -39,10 +45,10 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.13",
     "@cspell/dict-de-de": "^4.1.2",
-    "@markuplint/html-spec": "^4.18.0",
+    "@markuplint/html-spec": "5.5.0",
     "@vitest/ui": "^4.1.5",
     "cspell": "^10.0.0",
-    "markuplint": "^4.18.1",
+    "markuplint": "5.5.0",
     "sass-embedded": "^1.99.0",
     "stylelint": "^17.9.0",
     "stylelint-config-recess-order": "^7.7.0",
@@ -52,7 +58,7 @@
     "vitest": "^4.1.5"
   },
   "overrides": {
-    "deepmerge": ">=4.2.0",
+    "deepmerge": "^4.2.0",
     "glob": ">=14.0.2",
     "minimatch": ">=11.0.1"
   },
