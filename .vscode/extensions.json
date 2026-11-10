@@ -1,0 +1,83 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+    // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+    // List of extensions which should be recommended for users of this workspace.
+    "recommendations": [
+        // CORE INFRASTRUCTURE
+        "biomejs.biome",
+        "bmewburn.vscode-intelephense-client",
+        "editorconfig.editorconfig",
+        "ms-vscode.powershell",
+        "stylelint.vscode-stylelint",
+        "xdebug.php-debug",
+
+        // PHP & COMPOSER
+        "faelv.composer-companion",
+        "neilbrayfield.php-docblocker",
+        "recca0120.vscode-phpunit",
+
+        // FRONTEND HELPER
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "formulahendry.auto-rename-tag",
+        "joy-yu.css-snippets",
+        "kainiklas.composer-intellisense",
+        "karlito40.fix-irregular-whitespace",
+        "muath-ye.composer-intelephense",
+        "nhoizey.gremlins",
+        "solnurkarim.html-to-css-autocompletion",
+        "stkb.rewrap", // Zeilenumbrüche fixen
+        "xabikos.javascriptsnippets",
+
+        // GIT & WORKFLOW
+        "breadnaught.vscode-ignore",
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "mhutchie.git-graph",
+
+        // CODE QUALITY & DOKU
+        "aaron-bond.better-comments", // Bessere Kommentare
+        "DavidAnson.vscode-markdownlint",
+        "fanaticpythoner.better-todo-tree",
+        "oderwat.indent-rainbow",
+        "streetsidesoftware.code-spell-checker-german",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens", // Genial, um Fehler direkt in der Zeile zu sehen!
+        "usernamehw.todo-md", // Aufgaben in Markdown
+        "muuvmuuv.vscode-just-php-cs-fixer",
+
+        // UTILS
+        "eriklynd.json-tools",
+        "janisdd.vscode-edit-csv",
+        "ldd-vs-code.better-package-json",
+        "mechatroner.rainbow-csv",
+        "mrmlnc.vscode-apache",
+        "tomoki1207.pdf",
+        "yo1dog.cursor-align",
+
+        // Deutsch/German
+        "ms-ceintl.vscode-language-pack-de",
+        "nobuhito.printcode",
+
+        // THEME/VSCODE
+        // "lakshits11.monokai-pirokai",
+        "st-pham.php-refactor-tool",
+        "vira.vsc-vira-theme",
+
+        // Unsortiert
+        "devsense.composer-php-vscode",
+        "repreng.csv",
+        "jmkrivocapich.drawfolderstructure",
+        "kisstkondoros.vscode-gutter-preview",
+        "glenn2223.live-sass",
+        "yzhang.markdown-all-in-one",
+        "mehedidracula.php-namespace-resolver",
+        "redhat.vscode-xml",
+        "neontoolkit.vscode-neon-toolkit",
+        "rhevorn.confetti",
+        "dansysanalyst.pest-snippets"
+    ],
+    // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+    "unwantedRecommendations": ["htmlhint.vscode-htmlhint", "mikebovenlander.formate"]
+}

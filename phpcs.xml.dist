@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    name="Project Standards"
+    xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <description>Unified Modern PHP 8.3-8.5+ High-End Standard (DDD &amp; VSA)</description>
+
+    <arg name="basepath" value="." />
+    <arg name="extensions" value="php" />
+    <arg name="parallel" value="16" />
+    <arg name="colors" />
+    <arg value="ps" />
+    <arg name="cache" value=".cache/phpcs/.phpcs.cache" />
+
+    <file>src</file>
+    <file>public/index.php</file>
+
+    <!-- Entrypoint- und Bootstrap-Dateien dürfen Symbole und Ausführungen mischen -->
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>public/index.php</exclude-pattern>
+        <exclude-pattern>src/Bootstrap/app.php</exclude-pattern>
+        <exclude-pattern>tests/Pest.php</exclude-pattern>
+    </rule>
+
+    <rule ref="PSR12">
+        <!-- Deaktiviert das starre 120-Zeichen-Limit komplett (keine Warnings/Errors bei langen Zeilen) -->
+        <exclude name="Generic.Files.LineLength" />
+
+        <!-- Erlaubt "new class()" ohne Leerzeichen -->
+        <exclude name="PSR12.Classes.AnonClassDeclaration.SpaceAfterKeyword" />
+
+        <!-- Erlaubt "ExceptionA|ExceptionB" im Catch-Block ohne Leerzeichen -->
+        <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceBefore" />
+        <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceAfter" />
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.DNFTypeHintFormat" />
+
+    <rule ref="Universal.Arrays.DuplicateArrayKey" />
+    <rule ref="Universal.CodeAnalysis.ConstructorDestructorReturn" />
+    <rule ref="Universal.ControlStructures.DisallowLonelyIf" />
+
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true" />
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Variables.UnusedVariable">
+        <properties>
+            <!-- Verhindert Warnungen bei Hash-Map-Loops wie foreach ($allCodes as $fullCode => $dummy) -->
+            <property name="ignoreUnusedValuesWhenOnlyKeysAreUsedInForeach" value="true" />
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Variables.UselessVariable" />
+    <!-- Hinweis: UnusedParameter ist bewusst deaktiviert, da ActionInterface und QueryHandlerInterface feste Signaturen erzwingen -->
+    <rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue" />
+    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch" />
+    <rule ref="SlevomatCodingStandard.PHP.UselessParentheses" />
+    <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />
+
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator" />
+    <rule ref="SlevomatCodingStandard.Functions.RequireArrowFunction" />
+    <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference" />
+    <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion" />
+    <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing" />
+    <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
+
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit" />
+    <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn" />
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility" />
+
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax" />
+    <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma" />
+    <rule ref="SlevomatCodingStandard.Operators.RequireCombinedAssignmentOperator" />
+
+    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue" />
+    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints" />
+    <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint" />
+
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+        <properties>
+            <property name="allowFullyQualifiedGlobalClasses" value="false" />
+            <property name="allowFullyQualifiedGlobalFunctions" value="true" />
+            <property name="allowFullyQualifiedGlobalConstants" value="true" />
+            <property name="searchAnnotations" value="true" />
+        </properties>
+        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedNameWithoutNamespace" />
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+        <properties>
+            <property name="linesCountBeforeFirstContent" value="0" />
+            <property name="linesCountAfterLastContent" value="0" />
+            <property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
+            <property name="linesCountBetweenAnnotationsGroups" value="1" />
+            <property name="annotationsGroups" type="array">
+                <element value="@copyright, @license" />
+                <element value="@link" />
+                <element value="@author" />
+                <element value="@since" />
+                <!-- Templates und Generics IMMER vor param definieren -->
+                <element value="@template, @template-covariant, @template-extends, @template-implements, @extends, @implements" />
+                <element value="@param" />
+                <element value="@return, @throws" />
+                <element value="@var" />
+                <element value="@SuppressWarnings" />
+            </property>
+        </properties>
+    </rule>
+
+    <config name="testVersion" value="8.3-8.5" />
+    <rule ref="PHPCompatibility" />
+
+    <!-- DIE REGEL FÜR DIE ZEILENLÄNGE -->
+    <!--<rule ref="Generic.Files.LineLength">-->
+    <!--    <properties>-->
+            <!-- <property name="lineLimit" value="120" />
+            <property name="absoluteLineLimit" value="120" /> -->
+    <!--        <property name="lineLimit" value="120" />-->
+    <!--        <property name="absoluteLineLimit" value="0" />-->
+    <!--    </properties>-->
+    <!--</rule>-->
+</ruleset>

@@ -50,3 +50,11 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+### Manuell ###
+
+# Stammverzeichnis Dateien
+_notizen/
+.env
+deptrac.yaml
+LICENSE.md

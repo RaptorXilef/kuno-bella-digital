@@ -1,0 +1,14 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: max
+    paths:
+        - src/Backend
+        - public
+
+    phpVersion: 80300
+    tmpDir: .cache/phpstan
+
+    ignoreErrors:
+        - '#Variable \$[a-zA-Z0-9_]+ might not be defined\.#'
