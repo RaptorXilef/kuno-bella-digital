@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuno Beller Entwicklungstabelle</title>
+    <!-- Vite injiziert das CSS automatisch über die main.js -->
+</head>
+<body>
+    <!-- Feste Leiste oben (Punkt 3 deiner Anforderungen) -->
+    <header class="sticky-header">
+        <div class="header-content">
+            <div class="child-info">
+                Aktuelles Kind: <strong id="current-child-name">Neues Kind (Ungespeichert)</strong>
+            </div>
+            <div class="actions">
+                <label class="btn btn-secondary">
+                    Laden (JSON) <input type="file" id="upload-json" accept=".json" hidden>
+                </label>
+                <button id="save-json" class="btn btn-primary">Zwischenspeichern (Download)</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Startbildschirm: Neues Kind anlegen -->
+        <section id="setup-section" class="card">
+            <h2>Kind anlegen</h2>
+            <div class="form-group">
+                <label for="child-name">Vorname / Kürzel</label>
+                <input type="text" id="child-name" placeholder="z.B. Max M.">
+            </div>
+            <div class="form-group">
+                <label for="child-date">Beobachtungsdatum</label>
+                <input type="date" id="child-date">
+            </div>
+            <button id="start-assessment" class="btn btn-primary">Beobachtung starten</button>
+        </section>
+
+        <!-- Hier werden die Fragen dynamisch reingeladen -->
+        <section id="assessment-section" class="hidden">
+            <div id="question-container"></div>
+        </section>
+    </main>
+
+    <!-- Entry Point für die App -->
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

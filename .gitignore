@@ -58,3 +58,6 @@ _notizen/
 .env
 deptrac.yaml
 LICENSE.md
+
+# Secrets
+src/assets/data/questions.json
