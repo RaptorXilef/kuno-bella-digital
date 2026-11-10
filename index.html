@@ -18,16 +18,17 @@
                 <label class="c-button c-button--secondary">
                     Laden <input type="file" id="upload-json" accept=".kuno" hidden>
                 </label>
-                <button type="button" id="save-json" class="c-button c-button--primary is-hidden">Download</button>
-                <button type="button" id="export-pdf" class="c-button c-button--success is-hidden">Auswerten & PDF</button>
-                <button type="button" id="end-session" class="c-button c-button--danger is-hidden">Sitzung beenden</button>
+                <button type="button" id="save-json" class="c-button c-button--primary is-hidden">JSON Backup</button>
+                <button type="button" id="evaluate-btn" class="c-button c-button--primary is-hidden">Auswerten</button>
+                <button type="button" id="export-pdf-eval" class="c-button c-button--success is-hidden">PDF: Auswertung</button>
+                <button type="button" id="export-pdf-quest" class="c-button c-button--success is-hidden">PDF: Katalog</button>
+                <button type="button" id="end-session" class="c-button c-button--danger is-hidden">Beenden</button>
             </div>
         </div>
     </header>
 
-    <!-- Dieser Bereich wird später in das PDF exportiert -->
-    <main id="pdf-content" class="l-container">
-        <!-- Startbildschirm: Neues Kind anlegen -->
+    <main class="l-container">
+        <!-- Setup -->
         <section id="setup-section" class="c-card">
             <h2 class="c-card__title">Kind anlegen</h2>
             <div class="c-form-group">
@@ -45,18 +46,20 @@
             <button type="button" id="start-assessment" class="c-button c-button--primary">Beobachtung starten</button>
         </section>
 
-        <!-- Diagramm Sektion (wird erst bei Klick auf Auswerten sichtbar) -->
-        <section id="evaluation-section" class="c-evaluation is-hidden u-page-break-before">
+        <!-- Diagramm -->
+        <section id="evaluation-section" class="c-evaluation is-hidden">
             <h2 class="c-evaluation__title">Entwicklungsprofil</h2>
             <div class="c-evaluation__meta" id="eval-meta"></div>
-            <!-- WICHTIG: Festgelegte Höhe für Chart.js -->
-            <div class="c-evaluation__chart-wrapper" style="position: relative; height: 50vh; min-height: 400px; width: 100%;">
+            <div class="c-evaluation__chart-wrapper">
                 <canvas id="kuno-chart"></canvas>
             </div>
         </section>
 
-        <!-- Fragen-Katalog (wird zum Akkordeon) -->
-        <section id="assessment-section" class="c-accordion-container is-hidden">
+        <!-- Kompakte Schnellübersicht -->
+        <section id="quick-overview-section" class="c-overview is-hidden u-page-break-before"></section>
+
+        <!-- Fragen-Katalog -->
+        <section id="assessment-section" class="is-hidden">
             <div id="question-container"></div>
         </section>
     </main>

@@ -27,8 +27,7 @@ export default class Evaluation {
         const answersInPhase = questions.map((q) => this.childState.getAnswer(categoryName, phaseName, q.id));
 
         // Berechne die Punkte für diese Phase
-        const phasePoints = this.calculatePhasePoints(answersInPhase, questions.length);
-        categoryScore += phasePoints;
+        categoryScore += this.calculatePhasePoints(answersInPhase, questions.length);
       }
 
       // Der Score repräsentiert näherungsweise das Entwicklungsalter in "Phasen/Monaten"
@@ -49,15 +48,10 @@ export default class Evaluation {
    */
   calculatePhasePoints(answers, totalQuestionsInPhase) {
     if (totalQuestionsInPhase === 0) return 0;
-
     let rawPoints = 0;
-
     answers.forEach((answer) => {
-      if (answer === 'yes') {
-        rawPoints += 1;
-      } else if (answer === 'partially') {
-        rawPoints += 0.5;
-      }
+      if (answer === 'yes') rawPoints += 1;
+      else if (answer === 'partially') rawPoints += 0.5;
       // 'no', 'unknown' und null geben 0 Punkte
     });
 
@@ -85,5 +79,28 @@ export default class Evaluation {
       labels: Object.keys(scores),
       dataset: Object.values(scores),
     };
+  }
+
+  /**
+   * Konvertiert Kalendermonate in den Beller-Phasen-Wert,
+   * damit die Durchschnittslinie exakt ins Skalen-Fenster (1-14) passt.
+   */
+  static convertMonthsToPhase(months) {
+    if (months <= 1) return 1;
+    if (months <= 2) return 2;
+    if (months <= 3) return 3;
+    if (months <= 4) return 4;
+    if (months <= 5) return 5;
+    // Approximation / Interpolation für größere Stufen
+    if (months <= 7) return 6 + (months - 5) / 2;
+    if (months <= 9) return 7 + (months - 7) / 2;
+    if (months <= 11) return 8 + (months - 9) / 2;
+    if (months <= 15) return 9 + (months - 11) / 4;
+    if (months <= 21) return 10 + (months - 15) / 6;
+    if (months <= 28) return 11 + (months - 21) / 7;
+    if (months <= 36) return 12 + (months - 28) / 8;
+    if (months <= 48) return 13 + (months - 36) / 12;
+    if (months <= 72) return 14 + (months - 48) / 24;
+    return 14.5;
   }
 }

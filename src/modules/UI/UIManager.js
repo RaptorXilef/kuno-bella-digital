@@ -23,7 +23,9 @@ export default class UIManager {
       currentChildName: document.getElementById('current-child-name'),
       uploadJsonInput: document.getElementById('upload-json'),
       saveJsonBtn: document.getElementById('save-json'),
-      exportPdfBtn: document.getElementById('export-pdf'),
+      evaluateBtn: document.getElementById('evaluate-btn'),
+      exportPdfEvalBtn: document.getElementById('export-pdf-eval'),
+      exportPdfQuestBtn: document.getElementById('export-pdf-quest'),
       newAssessmentBtn: document.getElementById('new-assessment'),
       endSessionBtn: document.getElementById('end-session'),
 
@@ -35,6 +37,7 @@ export default class UIManager {
 
       assessmentSection: document.getElementById('assessment-section'),
       evaluationSection: document.getElementById('evaluation-section'),
+      overviewSection: document.getElementById('quick-overview-section'),
       evalMeta: document.getElementById('eval-meta'),
       chartCanvas: document.getElementById('kuno-chart'),
     };
@@ -58,6 +61,11 @@ export default class UIManager {
   }
 
   bindEvents() {
+    // Bereinigt die Print-Klassen, wenn der native PDF Dialog geschlossen wird
+    window.addEventListener('afterprint', () => {
+      document.body.classList.remove('print-eval', 'print-quest');
+    });
+
     // Neues Kind anlegen (Setup starten)
     this.elements.startAssessmentBtn.addEventListener('click', () => {
       const name = this.elements.childNameInput.value.trim();
@@ -70,15 +78,13 @@ export default class UIManager {
       }
 
       this.currentChildState = new ChildState(name, birthdate, date);
-      this.currentChildState.saveToStorage(); // Initiales Auto-Save
+      this.currentChildState.saveToStorage();
       this.startAssessment();
     });
 
     // Laufende Arbeit verwerfen und Neu Starten
     this.elements.newAssessmentBtn.addEventListener('click', () => {
-      if (this.currentChildState) {
-        if (!confirm('Achtung: Dein aktueller Verlauf geht verloren! Fortfahren?')) return;
-      }
+      if (this.currentChildState && !confirm('Achtung: Dein Verlauf geht verloren! Fortfahren?')) return;
       this.resetToSetup();
     });
 
@@ -124,16 +130,25 @@ export default class UIManager {
       a.href = url;
       a.download = `kuno_beller_${this.currentChildState.name}_${timestamp}.kuno`;
       a.click();
-
       URL.revokeObjectURL(url);
 
       // Da der Nutzer aktiv gespeichert hat, können wir das Backup leeren
       ChildState.clearStorage();
     });
 
+    this.elements.evaluateBtn.addEventListener('click', () => {
+      this.generateEvaluation();
+    });
+
     // Auswerten & PDF Export
-    this.elements.exportPdfBtn.addEventListener('click', () => {
-      this.generateEvaluationAndPdf();
+    this.elements.exportPdfEvalBtn.addEventListener('click', () => {
+      document.body.classList.add('print-eval');
+      window.print();
+    });
+
+    this.elements.exportPdfQuestBtn.addEventListener('click', () => {
+      document.body.classList.add('print-quest');
+      window.print();
     });
   }
 
@@ -144,7 +159,7 @@ export default class UIManager {
 
     // Aktions-Buttons einblenden
     this.elements.saveJsonBtn.classList.remove('is-hidden');
-    this.elements.exportPdfBtn.classList.remove('is-hidden');
+    this.elements.evaluateBtn.classList.remove('is-hidden');
     this.elements.endSessionBtn.classList.remove('is-hidden');
 
     this.elements.currentChildName.textContent = this.currentChildState.name;
@@ -163,10 +178,13 @@ export default class UIManager {
     this.elements.setupSection.classList.remove('is-hidden');
     this.elements.assessmentSection.classList.add('is-hidden');
     this.elements.evaluationSection.classList.add('is-hidden');
+    this.elements.overviewSection.classList.add('is-hidden');
 
     // Aktions-Buttons ausblenden
     this.elements.saveJsonBtn.classList.add('is-hidden');
-    this.elements.exportPdfBtn.classList.add('is-hidden');
+    this.elements.evaluateBtn.classList.add('is-hidden');
+    this.elements.exportPdfEvalBtn.classList.add('is-hidden');
+    this.elements.exportPdfQuestBtn.classList.add('is-hidden');
     this.elements.endSessionBtn.classList.add('is-hidden');
 
     // Formular-Felder leeren
@@ -181,18 +199,79 @@ export default class UIManager {
     }
   }
 
-  generateEvaluationAndPdf() {
+  generateOverviewGrid() {
+    const evalLogic = new Evaluation(this.currentChildState, this.questionsData);
+    let html = '<h2 class="c-overview__title">Schnellübersicht</h2>';
+
+    for (const [categoryName, phases] of Object.entries(this.questionsData)) {
+      html += `<div class="c-overview__category">`;
+      html += `<h3 class="c-overview__category-title">${categoryName}</h3>`;
+      html += `<table class="c-overview__table">`;
+
+      // Finde max. Fragenanzahl
+      const phaseKeys = Object.keys(phases);
+      const maxQ = Math.max(...phaseKeys.map((p) => phases[p].length));
+
+      // THEAD
+      html += '<thead><tr><th>Phase</th>';
+      phaseKeys.forEach((p) => (html += `<th>${p.replace('PHASE ', '')}</th>`));
+      html += '</tr></thead><tbody>';
+
+      // PUNKTZAHL REIHE
+      html += '<tr class="is-score"><td>Punkte</td>';
+      phaseKeys.forEach((p) => {
+        const answersInPhase = phases[p].map((q) => this.currentChildState.getAnswer(categoryName, p, q.id));
+        const pts = evalLogic.calculatePhasePoints(answersInPhase, phases[p].length);
+        html += `<td>${pts > 0 ? evalLogic.roundScore(pts) : ''}</td>`;
+      });
+      html += '</tr>';
+
+      // FRAGEN REIHEN
+      const aMap = { yes: '1', partially: '0.5', no: '0', unknown: '0' };
+      for (let i = 0; i < maxQ; i++) {
+        html += `<tr><td>F ${i + 1}</td>`;
+        phaseKeys.forEach((p) => {
+          const q = phases[p][i];
+          if (q) {
+            const ans = this.currentChildState.getAnswer(categoryName, p, q.id);
+            html += `<td>${ans ? aMap[ans] : ''}</td>`;
+          } else {
+            html += `<td class="is-empty"></td>`;
+          }
+        });
+        html += '</tr>';
+      }
+
+      html += '</tbody></table></div>';
+    }
+
+    this.elements.overviewSection.innerHTML = html;
+    this.elements.overviewSection.classList.remove('is-hidden');
+  }
+
+  generateEvaluation() {
     if (!this.currentChildState) return;
 
-    // 1. Auswertung berechnen
+    // 1. Blendet den "Auswerten" Button aus und zeigt die PDF Buttons
+    this.elements.evaluateBtn.classList.add('is-hidden');
+    this.elements.exportPdfEvalBtn.classList.remove('is-hidden');
+    this.elements.exportPdfQuestBtn.classList.remove('is-hidden');
+
+    // Render Schnellübersicht
+    this.generateOverviewGrid();
+
+    // Render Chart
     const evalLogic = new Evaluation(this.currentChildState, this.questionsData);
     const chartData = evalLogic.getChartData();
+
     const ageInMonths = this.currentChildState.getAgeInMonths();
+    const bellerPhaseAge = Evaluation.convertMonthsToPhase(ageInMonths);
 
     // Metadaten anzeigen
     this.elements.evalMeta.innerHTML = `
             <strong>Kind:</strong> ${this.currentChildState.name}<br>
             <strong>Lebensalter (bei Beobachtung):</strong> ${ageInMonths} Monate
+            <small>(entspricht ca. Phase ${evalLogic.roundScore(bellerPhaseAge)})</small>
         `;
 
     // 2. Diagramm-Bereich sichtbar machen
@@ -203,8 +282,10 @@ export default class UIManager {
       this.chartInstance.destroy();
     }
 
-    // Basis = Durchschnitt - 20%, Decke = Durchschnitt + 20% (als grobe visuelle Hilfslinien)
-    const ageLine = Array(chartData.labels.length).fill(ageInMonths);
+    const len = chartData.labels.length;
+    const lineDurchschnitt = Array(len).fill(bellerPhaseAge);
+    const lineBasis = Array(len).fill(Math.max(0, bellerPhaseAge - 1.5));
+    const lineDecke = Array(len).fill(Math.min(14, bellerPhaseAge + 1.5));
 
     // 4. Neues Balkendiagramm zeichnen
     this.chartInstance = new Chart(this.elements.chartCanvas, {
@@ -213,24 +294,46 @@ export default class UIManager {
         labels: chartData.labels,
         datasets: [
           {
-            label: 'Entwicklungsalter (Phasen/Monate)',
+            label: 'Erreicht',
             data: chartData.dataset,
             backgroundColor: 'rgba(54, 162, 235, 0.6)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
-            order: 2,
+            order: 4,
             barPercentage: 0.6,
           },
           {
             type: 'line',
-            label: 'Lebensalter (Durchschnitt)',
-            data: ageLine,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderDash: [5, 5],
+            label: 'Decke',
+            data: lineDecke,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderDash: [2, 2],
             borderWidth: 2,
-            pointRadius: 0, // Keine Punkte auf der Linie
+            pointRadius: 0,
             fill: false,
             order: 1,
+          },
+          {
+            type: 'line',
+            label: 'Durchschnitt',
+            data: lineDurchschnitt,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderDash: [5, 5],
+            borderWidth: 3,
+            pointRadius: 0,
+            fill: false,
+            order: 2,
+          },
+          {
+            type: 'line',
+            label: 'Basis',
+            data: lineBasis,
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderDash: [2, 2],
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: false,
+            order: 3,
           },
         ],
       },
@@ -241,23 +344,15 @@ export default class UIManager {
           y: {
             beginAtZero: true,
             max: 14, // Da wir 14 Phasen haben
-            title: { display: true, text: 'Phasen (ca. Monate)', font: { size: 14, weight: 'bold' } },
-            ticks: {
-              // Zwingt Chart.js, in 0.1er Schritten zu arbeiten
-              stepSize: 0.1,
-              callback: (value) => {
-                // Zeige nur volle Zahlen (1, 2, 3...) an der Achse an
-                if (Number.isInteger(value)) return value;
-                return null;
-              },
-            },
+            title: { display: true, text: 'Phasen', font: { size: 14, weight: 'bold' } },
+            ticks: { stepSize: 0.1, callback: (v) => (Number.isInteger(v) ? v : null) },
             grid: {
               // Zeichnet die Linien im Hintergrund (0.1 bis 0.9)
-              color: (context) => {
-                if (context.tick.value === 0) return 'rgba(0, 0, 0, 0.5)';
-                if (Number.isInteger(context.tick.value)) return 'rgba(0, 0, 0, 0.3)';
+              color: (ctx) => {
+                if (ctx.tick.value === 0) return 'rgba(0, 0, 0, 0.5)';
+                if (Number.isInteger(ctx.tick.value)) return 'rgba(0, 0, 0, 0.3)';
                 // Die .5er Mitte (Halbe Phase) etwas dunkler hervorheben
-                if ((context.tick.value * 10) % 10 === 5) return 'rgba(0, 0, 0, 0.15)';
+                if ((ctx.tick.value * 10) % 10 === 5) return 'rgba(0, 0, 0, 0.15)';
                 // Die 9 kleinen Zwischenstriche (0.1, 0.2...) sehr dezent
                 return 'rgba(0, 0, 0, 0.05)';
               },
@@ -266,10 +361,5 @@ export default class UIManager {
         },
       },
     });
-
-    // Dem Chart kurz Zeit geben (Animations-Ende), dann nativ drucken
-    setTimeout(() => {
-      window.print();
-    }, 800);
   }
 }
